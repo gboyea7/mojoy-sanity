@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "@/lib/sanityClient";
 
@@ -40,15 +39,10 @@ const fulfillOrder = async (session: any) => {
       amount: session.amount / 100,
       // lineItem: lineItems,
     });
-  } catch (error: any) {
-    console.log("error", error?.message);
-  }
 
-  console.log("session", session);
-  NextResponse.json({
-    message: "Payment done",
-    status: true,
-    method: session.status,
-    data: session,
-  });
+    console.log("Payment done:", session);
+  } catch (error) {
+    console.log("Error fulfilling order:", error);
+    throw error; // Optionally, you can re-throw the error to be handled by the caller
+  }
 };
