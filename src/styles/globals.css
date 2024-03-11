@@ -1,0 +1,17 @@
+@import "./base.css";
+@tailwind components;
+@tailwind utilities;
+
+.sticky-header {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  transition: background-color 0.3s ease; /* Smooth transition for the background color */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-header.scrolled {
+  position: fixed;
+  background-color: #fefefe;
+}
