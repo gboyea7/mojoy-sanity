@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "@/lib/sanityClient";
 
@@ -17,15 +16,15 @@ export default async function handler(
       await fulfillOrder(session);
 
       // Respond with a success message
-      return res.status(200).json({ status: "success" });
+      res.status(200).json({ status: "success" });
+    } else {
+      // If the event is not relevant or unrecognized, respond with success
+      res.status(200).json({ status: "success" });
     }
   } catch (error) {
     console.error("Error processing webhook event:", error);
-    return res.status(400).json({ status: "error" });
+    res.status(400).json({ status: "error" });
   }
-
-  // If the event is not relevant or unrecognized, respond with success
-  return res.status(200).json({ status: "success" });
 }
 
 const fulfillOrder = async (session: any) => {
@@ -45,10 +44,5 @@ const fulfillOrder = async (session: any) => {
   }
 
   console.log("session", session);
-  NextResponse.json({
-    message: "Payment done",
-    status: true,
-    method: session.status,
-    data: session,
-  });
+  // Not sure what NextResponse.json() is supposed to do here, you might remove it
 };
