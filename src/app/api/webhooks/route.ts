@@ -16,14 +16,14 @@ export default async function handler(
       await fulfillOrder(session);
 
       // Respond with a success message
-      res.status(200).json({ status: "success" });
+      return res.status(200).json({ status: "success" });
     } else {
       // If the event is not relevant or unrecognized, respond with success
-      res.status(200).json({ status: "success" });
+      return res.status(200).json({ status: "success" });
     }
   } catch (error) {
     console.error("Error processing webhook event:", error);
-    res.status(400).json({ status: "error" });
+    return res.status(400).json({ status: "error" });
   }
 }
 
@@ -40,9 +40,7 @@ const fulfillOrder = async (session: any) => {
       // lineItem: lineItems,
     });
   } catch (error: any) {
-    console.log("error", error?.message);
+    console.error("Error fulfilling order:", error.message);
+    throw new Error("Error fulfilling order");
   }
-
-  console.log("session", session);
-  // Not sure what NextResponse.json() is supposed to do here, you might remove it
 };
