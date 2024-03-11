@@ -36,7 +36,7 @@ const Cart = () => {
 
   const createCheckout = async () => {
     if (session?.user) {
-      const response = await fetch(`${process.env.NEXTAUTH_URL}api/checkout`, {
+      const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

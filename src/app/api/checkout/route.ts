@@ -27,7 +27,8 @@ export const POST = async (request: NextRequest) => {
       ),
       currency: "NGN", // Paystack requires currency in Nigerian Naira
       reference: Math.floor(Math.random() * 1000000000 + 1).toString(), // Generate a unique reference
-      callback_url: `${process.env.NEXTAUTH_URL}success?session_id={CHECKOUT_SESSION_ID}`,
+      callback_url:
+        "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
       metadata: {
         email,
       },

@@ -12,6 +12,7 @@ const Bottombanner = () => {
   summerSalesEndDate.setDate(28); // 28th day of the month
 
   // Calculate the remaining days until the end of the promotion
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const calculateRemainingDays = () => {
     const currentDate = new Date();
     const timeDifference = summerSalesEndDate.getTime() - currentDate.getTime();
@@ -27,7 +28,7 @@ const Bottombanner = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [calculateRemainingDays]); //
 
   // Format the end date to a string
   const formattedEndDate = `${summerSalesEndDate.toLocaleDateString("en-US", {
