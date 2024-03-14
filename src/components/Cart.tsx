@@ -13,17 +13,10 @@ import Link from "next/link";
 import Price from "./Price";
 import { useSession } from "next-auth/react";
 import { DeliveryProps } from "../../type";
-import { client } from "@/lib/sanityClient";
-import { groq } from "next-sanity";
 
 interface Props {
   deliveries: DeliveryProps[];
 }
-
-const deliveryQuery = `*[_type == 'delivery']{
-  state,
-  amount,
-} | order(_createdAt asc)`;
 
 const Cart = ({ deliveries }: Props) => {
   const { productData } = useSelector((state: StateProps) => state.mojoy);
@@ -46,24 +39,24 @@ const Cart = ({ deliveries }: Props) => {
     toast.success("Cart resetted successfully!");
   };
 
-  // const createCheckout = async () => {
-  //   if (session?.user) {
-  //     const response = await fetch("/api/checkout", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         items: productData,
-  //         email: session?.user?.email,
-  //       }),
-  //     });
-  //     const data = await response.json();
-  //     if (response.ok) {
-  //       window.location.href = data.redirect_url; // Redirect to Paystack checkout
-  //     }
-  //   } else {
-  //     toast.error("Please sign in to make Checkout");
-  //   }
-  // };
+  const createCheckout = async () => {
+    if (session?.user) {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: productData,
+          email: session?.user?.email,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        window.location.href = data.redirect_url; // Redirect to Paystack checkout
+      }
+    } else {
+      toast.error("Please sign in to make Checkout");
+    }
+  };
   return (
     <Container className="">
       {productData?.length > 0 ? (
