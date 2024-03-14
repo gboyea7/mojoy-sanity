@@ -64,11 +64,12 @@ const NewArrival = ({ products }: Props) => {
           transition: { delay: 0.5, duration: 0.9 },
         }}
         viewport={{ once: true }}
-        className="my-2 lg:my-4 ml-5 lg:ml-10"
+        className="my-2 lg:my-4 ml-5 lg:ml-10 group"
       >
-        <h1 className="text-2xl text-right lg:text-3xl font-medium">
+        <h1 className="text-2xl text-center lg:text-3xl font-medium">
           Newly Arrived
         </h1>
+        <div className="h-2 my-4 lg:mx-24 mx-8 bg-slate-200 group-hover:bg-yellow-400"></div>
       </motion.div>
     </Container>
   );

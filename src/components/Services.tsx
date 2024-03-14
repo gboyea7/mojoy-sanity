@@ -20,7 +20,7 @@ const services = [
   },
   {
     image: service3,
-    title: "Support 24/7",
+    title: "Excellent Support",
     tagline: "Shop with an expert",
   },
   {
@@ -37,7 +37,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="flex flex-col my-10 justify-center items-center">
+    <section className="flex flex-col my-10 lg:my-20 justify-center items-center">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{

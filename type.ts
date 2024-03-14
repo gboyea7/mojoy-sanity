@@ -41,6 +41,16 @@ export interface CategoryProps {
     };
   };
 }
+
+export interface DeliveryProps {
+  _id: string;
+  _type: string;
+  _rev: string;
+  _createdAt: string;
+  _updatedAt: string;
+  state: string;
+  amount: number;
+}
 export interface StateProps {
   mojoy: {
     productData: ProductProps[];

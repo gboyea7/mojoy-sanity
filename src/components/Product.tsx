@@ -19,7 +19,7 @@ interface Props {
 const Product = ({ product, bg }: Props) => {
   const dispatch = useDispatch();
   return (
-    <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500 rounded-lg overflow-hidden group">
+    <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500  rounded-lg overflow-hidden group">
       <div className="w-full h-80 flex items-center justify-center bg-white overflow-hidden">
         <div className={`relative ${bg}`}>
           <div>
@@ -70,7 +70,7 @@ const Product = ({ product, bg }: Props) => {
           )}
         </div>
       </div>
-      <div className="max-w-80 py-6 flex flex-col gap-1 px-4">
+      <div className=" py-6 flex flex-col gap-1 w-full bg-slate-200 px-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg text-primary font-bold">
             {product?.title.substring(0, 15)}

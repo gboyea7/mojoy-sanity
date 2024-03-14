@@ -40,7 +40,16 @@ export const productQuery = groq`*[_type == 'product']{
   body,
 } | order(_createdAt desc)`;
 
+const deliveryQuery = `*[_type == 'delivery']{
+  state,
+  amount,
+} | order(_createdAt asc)`;
+
 export const products = async () => {
   const productData = await client.fetch(productQuery);
   return productData;
+};
+export const deliveries = async () => {
+  const deliveryData = await client.fetch(deliveryQuery);
+  return deliveryData;
 };

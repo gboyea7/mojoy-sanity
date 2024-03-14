@@ -27,9 +27,9 @@ const NavIcon = () => {
           <Image
             src={session?.user?.image!}
             alt="user image"
-            width={35}
-            height={35}
-            className="rounded-full lg:w-16 "
+            width={30}
+            height={30}
+            className="rounded-full "
           />
         ) : (
           <FaRegUser className="cursor-pointer text-2xl text-gray-800 hover:text-yellow-400" />

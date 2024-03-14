@@ -12,8 +12,20 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Price from "./Price";
 import { useSession } from "next-auth/react";
+import { DeliveryProps } from "../../type";
+import { client } from "@/lib/sanityClient";
+import { groq } from "next-sanity";
 
-const Cart = () => {
+interface Props {
+  deliveries: DeliveryProps[];
+}
+
+const deliveryQuery = `*[_type == 'delivery']{
+  state,
+  amount,
+} | order(_createdAt asc)`;
+
+const Cart = ({ deliveries }: Props) => {
   const { productData } = useSelector((state: StateProps) => state.mojoy);
   const dispatch = useDispatch();
   const [totalAmt, setTotalAmt] = useState(0);
@@ -34,24 +46,24 @@ const Cart = () => {
     toast.success("Cart resetted successfully!");
   };
 
-  const createCheckout = async () => {
-    if (session?.user) {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: productData,
-          email: session?.user?.email,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        window.location.href = data.redirect_url; // Redirect to Paystack checkout
-      }
-    } else {
-      toast.error("Please sign in to make Checkout");
-    }
-  };
+  // const createCheckout = async () => {
+  //   if (session?.user) {
+  //     const response = await fetch("/api/checkout", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         items: productData,
+  //         email: session?.user?.email,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       window.location.href = data.redirect_url; // Redirect to Paystack checkout
+  //     }
+  //   } else {
+  //     toast.error("Please sign in to make Checkout");
+  //   }
+  // };
   return (
     <Container className="">
       {productData?.length > 0 ? (
@@ -76,7 +88,37 @@ const Cart = () => {
             Reset cart
           </button>
 
-          <div className="max-w-7xl gap-4 flex justify-end mt-4">
+          <div className="max-w-7xl gap-4 flex flex-col lg:flex-row lg:items-start items-center lg:justify-between mt-4">
+            <div className="w-96 flex flex-col  gap-4">
+              <h1 className="text-2xl font-semibold text-right lg:text-left">
+                Delivery details
+              </h1>
+              <div className=" flex flex-col justify-center">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
+                  placeholder="Enter your phone number"
+                />
+
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
+                  placeholder="Enter your state"
+                />
+
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
+                  placeholder="Enter your address"
+                />
+              </div>
+            </div>
             <div className="w-96 flex flex-col gap-4">
               <h1 className="text-2xl font-semibold text-right">Cart totals</h1>
               <div>
@@ -90,6 +132,7 @@ const Cart = () => {
                   Shipping Charge
                   <div className="flex flex-col items-end">
                     <span className="font-semibold tracking-wide font-titleFont">
+                      {/*price on state*/}
                       <Price amount={2500} />
                     </span>
                     <span className="text-xs font-normal">
@@ -106,7 +149,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-end">
                 <button
-                  onClick={createCheckout}
+                  //  onClick={createCheckout}
                   className="w-52 h-10 bg-primary text-black bg-yellow-400 hover:text-yellow-400 hover:bg-black duration-300"
                 >
                   Proceed to Checkout

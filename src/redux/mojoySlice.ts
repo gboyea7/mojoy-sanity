@@ -14,21 +14,17 @@ export const mojoySlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const { _id, quantity } = action.payload;
-      const existingProduct = state.productData.find(
+      const { _id } = action.payload;
+      const existingProductIndex = state.productData.findIndex(
         (item) => item._id === _id
       );
 
-      if (existingProduct) {
-        const newQuantity = existingProduct.quantity + quantity;
-        if (newQuantity <= existingProduct.quantity) {
-          existingProduct.quantity = newQuantity;
-        } else {
-          console.error("Exceeded available quantity");
-        }
+      if (existingProductIndex !== -1) {
+        // If product already exists, do nothing
+        console.error("Product already in the cart");
       } else {
-        action.payload.availableQuantity = action.payload.quantity; // Set availableQuantity initially
-        state.productData.push(action.payload);
+        const productToAdd = { ...action.payload, quantity: 1 }; // Set quantity to 1
+        state.productData.push(productToAdd);
       }
     },
     increaseQuantity: (state, action) => {

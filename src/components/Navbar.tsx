@@ -23,7 +23,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const handleScroll = () => {
-    const isTop = window.scrollY < 100;
+    const isTop = window.scrollY < 5;
     setIsScrolled(!isTop);
   };
   useEffect(() => {
@@ -64,13 +64,29 @@ const Navbar = () => {
         </ul>
       </div>
       {/*Main nav*/}
-      <div>
-        <div
-          className={`sticky-header w-full h-16 bg-white border-b-2 border-b-gray-100 ${
-            isScrolled ? "scrolled" : ""
-          }`}
-        >
+      <div
+        className={`sticky-header flex flex-col ${
+          isScrolled ? "scrolled" : ""
+        }`}
+      >
+        <div className="w-full lg:h-20 h-16 bg-white border-b-2 border-b-gray-100">
           <nav className="flex items-center justify-between gap-2 h-full max-w-screen-xl mx-auto px-4 xl:px-0">
+            {/*icons*/}
+            <div className="lg:hidden block">
+              <NavIcon />
+            </div>
+
+            {/*Logo*/}
+            <Link href={"/"}>
+              <Image src={logo} alt="logo" className="w-24" />
+            </Link>
+            <div className="hidden lg:flex">
+              <Search />
+            </div>
+            {/*icons*/}
+            <div className="hidden lg:flex">
+              <NavIcon />
+            </div>
             {/*menu*/}
             <div className="inline-flex md:hidden">
               <HiMenuAlt2
@@ -78,14 +94,10 @@ const Navbar = () => {
                 className="cursor-pointer w-8 h-6"
               />
             </div>
-            {/*Logo*/}
-            <Link href={"/"}>
-              <Image src={logo} alt="logo" className="w-24" />
-            </Link>
-            <Search />
-            {/*icons*/}
-            <NavIcon />
           </nav>
+        </div>
+        <div className="h-14 flex lg:hidden items-center justify-center py-2 w-full">
+          <Search />
         </div>
       </div>
 
@@ -109,7 +121,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div
         className={`lg:hidden fixed top-0 right-0 h-full bg-white z-50 transition-all duration-500 ${
-          isMenuOpen ? "w-2/3" : "w-0"
+          isMenuOpen ? "w-3/5" : "w-0"
         }`}
         onClick={() => setIsMenuOpen(false)}
       >
