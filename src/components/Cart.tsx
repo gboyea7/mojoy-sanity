@@ -12,13 +12,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Price from "./Price";
 import { useSession } from "next-auth/react";
-import { DeliveryProps } from "../../type";
 
-interface Props {
-  deliveries: DeliveryProps[];
-}
-
-const Cart = ({ deliveries }: Props) => {
+const Cart = () => {
   const { productData } = useSelector((state: StateProps) => state.mojoy);
   const dispatch = useDispatch();
   const [totalAmt, setTotalAmt] = useState(0);
