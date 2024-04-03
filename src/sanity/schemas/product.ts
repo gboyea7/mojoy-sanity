@@ -46,13 +46,13 @@ export default defineType({
 
     defineField({
       name: "price",
-      title: "Price",
+      title: "Discount Price",
       type: "number",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "rowprice",
-      title: "Row Price",
+      title: "non discount Price",
       type: "number",
     }),
     defineField({
