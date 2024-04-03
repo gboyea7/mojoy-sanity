@@ -8,7 +8,7 @@ export default defineType({
   fields: [
     defineField({
       name: "state",
-      title: "State",
+      title: "Region",
       type: "string",
     }),
     defineField({
