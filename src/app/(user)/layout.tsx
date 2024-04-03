@@ -6,10 +6,11 @@ import "slick-carousel/slick/slick.css";
 import Footer from "../../components/Footer";
 import Layout from "@/components/Layout";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Mojoy | Thinking of you",
   description:
     "Discover the latest tech products at Mojoy's Store. Thinking of you.",
+  favicon: "./favicon.ico",
 };
 
 export default function RootLayout({
@@ -21,9 +22,9 @@ export default function RootLayout({
     <>
       <html lang="en">
         <Head>
-          <title>Mojoy | Thinking of you</title>
+          <title>{metadata.title}</title>
           <meta name="description" content={metadata.description || ""} />
-          <link rel="icon" href="./favicon.ico" />
+          <link rel="icon" href={metadata.favicon} />
         </Head>
         <body className="font-display">
           <Layout>

@@ -15,7 +15,10 @@ const Navbar = () => {
   const navBarlist = [
     { title: "Home", link: "/" },
     { title: "Our Shop", link: "/shop" },
-    { title: "Hp-store", link: "/hp" },
+    { title: "Hp", link: "/hp" },
+    { title: "Dell", link: "/dell" },
+    { title: "Lenovo", link: "/lenovo" },
+    { title: "Asus", link: "/asus" },
     { title: "About Us", link: "/about" },
     { title: "Contact Us", link: "/contact" },
   ];
@@ -103,7 +106,7 @@ const Navbar = () => {
 
       {/*Menu list*/}
       <div className="w-full h-10 bg-[#FAFAFA]  md:block hidden">
-        <div className="flex gap-16 max-w-[700px] h-full items-center justify-center mx-auto">
+        <div className="flex gap-10 h-full items-center justify-center mx-auto">
           {navBarlist.map((item) => (
             <Link
               href={item?.link}

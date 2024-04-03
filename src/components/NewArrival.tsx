@@ -46,31 +46,55 @@ const NewArrival = ({ products }: Props) => {
     ],
   };
   return (
-    <Container className="-mt-40">
+    <Container className="-mt-32 relative">
       <div>
-        <Slider {...settings}>
-          {products?.map((item: ProductProps) => (
-            <div key={item?._id} className="px-2">
-              <Product product={item} />
-            </div>
-          ))}
-        </Slider>
+        <motion.div // Moved heading outside the conditional block
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { delay: 0.5, duration: 0.9 },
+          }}
+          viewport={{ once: true }}
+          className="my-2 lg:my-4 ml-5 lg:ml-10 group"
+        >
+          <h1 className="text-2xl text-center lg:text-3xl font-medium">
+            Newly Arrived
+          </h1>
+          <div className="h-2 my-4 lg:mx-24 mx-8 bg-slate-200 hover:bg-yellow-400"></div>
+        </motion.div>
+
+        {/* Conditional Rendering and Grid Display */}
+        {products.length === 0 ? (
+          <div className="px-2 text-2xl capitalize text-center">
+            No new products available.
+          </div>
+        ) : (
+          <div
+            className={
+              products.length <= 3
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-2"
+                : ""
+            }
+          >
+            {products.length <= 3 ? (
+              products.map((item: ProductProps) => (
+                <div key={item?._id}>
+                  <Product product={item} />
+                </div>
+              ))
+            ) : (
+              <Slider {...settings}>
+                {products.map((item: ProductProps) => (
+                  <div key={item?._id} className="px-2">
+                    <Product product={item} />
+                  </div>
+                ))}
+              </Slider>
+            )}
+          </div>
+        )}
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: { delay: 0.5, duration: 0.9 },
-        }}
-        viewport={{ once: true }}
-        className="my-2 lg:my-4 ml-5 lg:ml-10 group"
-      >
-        <h1 className="text-2xl text-center lg:text-3xl font-medium">
-          Newly Arrived
-        </h1>
-        <div className="h-2 my-4 lg:mx-24 mx-8 bg-slate-200 group-hover:bg-yellow-400"></div>
-      </motion.div>
     </Container>
   );
 };

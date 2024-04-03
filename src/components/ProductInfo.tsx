@@ -12,7 +12,7 @@ const ProudctInfo = ({ product }: Props) => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-4xl font-semibold">{product?.title}</h2>
+      <h2 className="text-2xl font-semibold">{product?.title}</h2>
       <div className="flex flex-col lg:flex-row justify-start lg:items-center gap-4">
         <p className="text-lg font-normal text-gray-500 line-through">
           <Price amount={product?.rowprice} />

@@ -48,13 +48,36 @@ const RelatedProduct = ({ relatedProducts }: Props) => {
   return (
     <div className="w-full pb-20">
       <div>
-        <Slider {...settings}>
-          {relatedProducts?.map((item: ProductProps) => (
-            <div key={item?._id} className="px-2">
-              <Product product={item} />
-            </div>
-          ))}
-        </Slider>
+        {/* Conditional Rendering and Grid Display */}
+        {relatedProducts.length === 0 ? (
+          <div className="p-4 text-2xl capitalize text-center">
+            No other products available.
+          </div>
+        ) : (
+          <div
+            className={
+              relatedProducts.length <= 3
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-2"
+                : ""
+            }
+          >
+            {relatedProducts.length <= 3 ? (
+              relatedProducts.map((item: ProductProps) => (
+                <div key={item?._id}>
+                  <Product product={item} />
+                </div>
+              ))
+            ) : (
+              <Slider {...settings}>
+                {relatedProducts.map((item: ProductProps) => (
+                  <div key={item?._id} className="px-2">
+                    <Product product={item} />
+                  </div>
+                ))}
+              </Slider>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

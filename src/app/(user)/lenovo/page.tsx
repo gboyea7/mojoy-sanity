@@ -5,12 +5,12 @@ import { client } from "@/lib/sanityClient";
 import { groq } from "next-sanity";
 
 export const revalidate = 10;
-const bannerQuery = groq`*[_type == 'hpbanner']{
+const bannerQuery = groq`*[_type == 'lenovobanner']{
   image,
   _id
 } | order(_createdAt asc)`;
 
-const hpQuery = groq`*[_type == 'product' && brand->title =='hp']{
+const lenovoQuery = groq`*[_type == 'product' && brand->title =='lenovo']{
 _id,
   _type,
   _rev,
@@ -31,7 +31,7 @@ _id,
  
 } | order(_createdAt asc)`;
 
-const newHpQuery = groq`*[_type == 'product' && brand->title =='hp' && position =='new-arrival']{
+const newlenovoQuery = groq`*[_type == 'product' && brand->title =='lenovo' && position =='new-arrival']{
 _id,
   _type,
   _rev,
@@ -54,13 +54,13 @@ _id,
 
 const HpPage = async () => {
   const banners = await client.fetch(bannerQuery);
-  const hpProducts = await client.fetch(hpQuery);
-  const newHpProducts = await client.fetch(newHpQuery);
+  const lenovoProducts = await client.fetch(lenovoQuery);
+  const newlenovoProducts = await client.fetch(newlenovoQuery);
   return (
     <main className="text-sm min-h-screen overflow-hidden">
       <Banner banners={banners} />
-      <NewArrival products={newHpProducts} />
-      <AllProduct products={hpProducts} title="Hp" />
+      <NewArrival products={newlenovoProducts} />
+      <AllProduct products={lenovoProducts} title="Lenovo" />
     </main>
   );
 };

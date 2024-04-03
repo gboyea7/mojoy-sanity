@@ -92,11 +92,11 @@ const SinglePage = async ({ params: { slug } }: Props) => {
         <div>
           <Onsale products={specialOffersProduct} />
         </div>
-        <div className="h-full xl:col-span-2">
+        <div className="h-full xl:col-span-2 group">
           <Image
             src={urlFor(product?.image).url()}
             alt="product image"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1]"
             width={500}
             height={500}
           />

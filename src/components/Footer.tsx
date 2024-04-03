@@ -12,7 +12,7 @@ const phone = [
 ];
 
 const navlink = [
-  { href: "/store", title: "Our Store" },
+  { href: "/shop", title: "Our Store" },
   { href: "/contact", title: "Contact Us" },
   { href: "/about", title: "About Us" },
 ];

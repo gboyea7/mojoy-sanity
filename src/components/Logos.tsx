@@ -12,6 +12,7 @@ import logo6 from "@/assets/brand-06.png";
 import logo7 from "@/assets/brand-07.png";
 import logo8 from "@/assets/brand-08.png";
 import logo9 from "@/assets/brand-09.png";
+import logo10 from "@/assets/brand-10.png";
 
 const logos = [
   { id: 1, src: logo1, alt: "Logo" },
@@ -23,15 +24,17 @@ const logos = [
   { id: 7, src: logo7, alt: "Logo" },
   { id: 8, src: logo8, alt: "Logo" },
   { id: 9, src: logo9, alt: "Logo" },
-  { id: 10, src: logo1, alt: "Logo" },
-  { id: 11, src: logo2, alt: "Logo" },
-  { id: 12, src: logo3, alt: "Logo" },
-  { id: 13, src: logo4, alt: "Logo" },
-  { id: 14, src: logo5, alt: "Logo" },
-  { id: 15, src: logo6, alt: "Logo" },
-  { id: 16, src: logo7, alt: "Logo" },
-  { id: 17, src: logo8, alt: "Logo" },
-  { id: 18, src: logo9, alt: "Logo" },
+  { id: 10, src: logo10, alt: "Logo" },
+  { id: 11, src: logo1, alt: "Logo" },
+  { id: 12, src: logo2, alt: "Logo" },
+  { id: 13, src: logo3, alt: "Logo" },
+  { id: 14, src: logo4, alt: "Logo" },
+  { id: 15, src: logo5, alt: "Logo" },
+  { id: 16, src: logo6, alt: "Logo" },
+  { id: 17, src: logo7, alt: "Logo" },
+  { id: 18, src: logo8, alt: "Logo" },
+  { id: 19, src: logo9, alt: "Logo" },
+  { id: 20, src: logo10, alt: "Logo" },
 ];
 
 const Logos = () => {

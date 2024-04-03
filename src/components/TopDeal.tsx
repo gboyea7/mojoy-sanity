@@ -64,13 +64,20 @@ const TopDeal = ({ products }: Props) => {
         <div className="h-2 my-4 lg:mx-24 mx-8 bg-slate-200 group-hover:bg-yellow-400"></div>
       </motion.div>
       <div>
-        <Slider {...settings}>
-          {products?.map((item: ProductProps) => (
-            <div key={item?._id} className="px-2">
-              <ListProduct product={item} />
-            </div>
-          ))}
-        </Slider>
+        {/* Conditional Rendering and Grid Display */}
+        {products.length === 0 ? (
+          <div className="px-2 text-2xl capitalize text-center">
+            No top products available.
+          </div>
+        ) : (
+          <Slider {...settings}>
+            {products.map((item: ProductProps) => (
+              <div key={item?._id} className="px-2">
+                <ListProduct product={item} />
+              </div>
+            ))}
+          </Slider>
+        )}
       </div>
     </Container>
   );

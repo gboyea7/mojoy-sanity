@@ -28,7 +28,7 @@ const Product = ({ product, bg }: Props) => {
               alt="product image"
               width={700}
               height={700}
-              className="w-72 h-72 object-contain"
+              className="w-72 h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.2]"
             />
           </div>
           <div className="bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300">
@@ -70,19 +70,11 @@ const Product = ({ product, bg }: Props) => {
           )}
         </div>
       </div>
-      <div className=" py-6 flex flex-col gap-1 w-full bg-slate-200 px-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg text-primary font-bold">
-            {product?.title.substring(0, 15)}
+      <div className="px-2 py-4 flex flex-col gap-1 w-full bg-slate-200">
+        <div className="flex items-center justify-center">
+          <h2 className="text-sm text-primary font-bold">
+            {product?.title.substring(0, 55)}...
           </h2>
-          <div className="flex flex-col items-center justify-center">
-            <p className="font-medium line-through decoration-red-500 text-xs">
-              <Price amount={product?.rowprice} />
-            </p>
-            <p className="font-bold">
-              <Price amount={product?.price} />
-            </p>
-          </div>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-[#767676] text-sm">
@@ -91,12 +83,26 @@ const Product = ({ product, bg }: Props) => {
               {product?.brand}
             </span>
           </p>
-          <div className="flex items-center gap-1">
-            <MdOutlineStarPurple500 className="text-lg text-yellow-500" />
-            <span className="font-medium text-sm">{product?.ratings}</span>
+          <div className="flex flex-col items-center justify-center">
+            <p className="font-medium line-through decoration-red-500 text-xs">
+              <Price amount={product?.rowprice} />
+            </p>
+            <p className="font-bold text-md">
+              <Price amount={product?.price} />
+            </p>
           </div>
         </div>
+        <div className="flex items-center gap-1">
+          {/* Loop to render stars based on the rating */}
+          {[...Array(product.ratings)].map((_, index) => (
+            <MdOutlineStarPurple500
+              key={index}
+              className="text-lg text-yellow-400"
+            />
+          ))}
+        </div>
       </div>
+
       <Toaster
         position="bottom-right"
         toastOptions={{

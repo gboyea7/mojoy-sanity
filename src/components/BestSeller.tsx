@@ -65,13 +65,36 @@ const BestSeller = ({ products }: Props) => {
       </motion.div>
 
       <div>
-        <Slider {...settings}>
-          {products?.map((item: ProductProps) => (
-            <div key={item?._id} className="px-2">
-              <Product product={item} />
-            </div>
-          ))}
-        </Slider>
+        {/* Conditional Rendering and Grid Display */}
+        {products.length === 0 ? (
+          <div className="px-2 text-2xl capitalize text-center">
+            No Best products available.
+          </div>
+        ) : (
+          <div
+            className={
+              products.length <= 3
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-2"
+                : ""
+            }
+          >
+            {products.length <= 3 ? (
+              products.map((item: ProductProps) => (
+                <div key={item?._id}>
+                  <Product product={item} />
+                </div>
+              ))
+            ) : (
+              <Slider {...settings}>
+                {products.map((item: ProductProps) => (
+                  <div key={item?._id} className="px-2">
+                    <Product product={item} />
+                  </div>
+                ))}
+              </Slider>
+            )}
+          </div>
+        )}
       </div>
     </Container>
   );
