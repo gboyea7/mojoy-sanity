@@ -15,3 +15,28 @@
   position: fixed;
   background-color: #fefefe;
 }
+.loader-container {
+  /* We'll add this class to a container around your loader  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 8px solid #ffc107; /* yellow-500 */
+  border-radius: 50%;
+  border-top-color: transparent;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

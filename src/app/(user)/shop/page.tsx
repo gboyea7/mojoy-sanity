@@ -12,6 +12,7 @@ import noproduct from "../../../assets/noproduct.png";
 const ShopPage = () => {
   const [showGrid, setShowGrid] = useState(true);
   const [showList, setShowList] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Start with loading state
   const [productData, setProductData] = useState<ProductProps[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [productsPerPage] = useState<number>(12);
@@ -22,6 +23,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true); // Show loader when fetching starts
       try {
         const data = await products();
         setProductData(data);
@@ -39,6 +41,8 @@ const ShopPage = () => {
         setBrands(uniqueBrands);
       } catch (error) {
         console.error("Error fetching product data:", error);
+      } finally {
+        setIsLoading(false); // Hide loader after fetching, even on error
       }
     };
     fetchData();
@@ -133,7 +137,12 @@ const ShopPage = () => {
           </span>
         </div>
       </div>
-      {currentProducts.length === 0 ? (
+      {isLoading ? (
+        <div className="loader-container h-[300px] lg:h-[360px]">
+          <div className="loader"></div>
+        </div>
+      ) : // Existing product display logic...
+      currentProducts.length === 0 ? (
         <div className="flex flex-col items-center justify-center my-8">
           <Image
             src={noproduct}
@@ -159,6 +168,7 @@ const ShopPage = () => {
           ))}
         </div>
       )}
+
       <nav className="flex justify-center mt-5">
         <ul className="flex gap-5">
           {Array.from(
