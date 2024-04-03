@@ -42,7 +42,10 @@ const ShopPage = () => {
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
-        setIsLoading(false); // Hide loader after fetching, even on error
+        // Hide the loader after a 15-second delay
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       }
     };
     fetchData();
@@ -82,14 +85,14 @@ const ShopPage = () => {
 
   return (
     <div className="flex flex-col w-full my-4 lg:my-10 px-2 lg:px-16 overflow-hidden">
-      <div className="flex items-center justify-between  gap-2 lg:pb-10 pb-4">
-        <div className="flex w-full lg:w-1/2 px-2 items-center">
-          Filter:
+      <div className="flex  lg:items-center justify-between  gap-2 lg:pb-10 pb-4">
+        <div className="flex flex-col gap-2 lg:flex-row w-full lg:w-1/2 px-2 lg:items-center items-start">
+          <div> Filter:</div>
           <select
-            className="ml-2 px-2 py-1 border border-gray-300 rounded-md"
+            className="px-2 py-1 border border-gray-300 rounded-md"
             onChange={handleCategoryChange}
           >
-            <option value="">Category</option>
+            <option value="">All Categories</option>
             {categories.map((category, index) => (
               <option key={index} value={category}>
                 {category}
@@ -97,10 +100,10 @@ const ShopPage = () => {
             ))}
           </select>
           <select
-            className="ml-2 px-2 py-1 border border-gray-300 rounded-md"
+            className="px-2 py-1 border border-gray-300 rounded-md"
             onChange={handleBrandChange}
           >
-            <option value="">Brand</option>
+            <option value="">All Brands</option>
             {brands.map((brand, index) => (
               <option key={index} value={brand}>
                 {brand}
