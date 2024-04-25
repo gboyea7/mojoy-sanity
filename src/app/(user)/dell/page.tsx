@@ -31,35 +31,12 @@ _id,
  
 } | order(_createdAt asc)`;
 
-const newDellQuery = groq`*[_type == 'product' && brand->title =='dell' && position =='new-arrival']{
-_id,
-  _type,
-  _rev,
-  _createdAt,
-  price,
-  rowprice,
-  title,
-  position,
-  ratings,
-  description,
-  'brand': brand->title,
-  slug,
-  image,
-  "category":category[0]->title,
-  isnew,
-  body,
-  quantity,
- 
-} | order(_createdAt asc)`;
-
 const HpPage = async () => {
   const banners = await client.fetch(bannerQuery);
   const dellProducts = await client.fetch(dellQuery);
-  const newDellProducts = await client.fetch(newDellQuery);
   return (
     <main className="text-sm min-h-screen overflow-hidden">
       <Banner banners={banners} />
-      <NewArrival products={newDellProducts} />
       <AllProduct products={dellProducts} title="Dell" />
     </main>
   );

@@ -55,5 +55,6 @@ export interface StateProps {
   mojoy: {
     productData: ProductProps[];
     categoryData: CategoryProps[];
+    deliveryData: DeliveryProps[];
   };
 }

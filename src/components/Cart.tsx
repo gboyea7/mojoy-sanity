@@ -16,6 +16,9 @@ import { useSession } from "next-auth/react";
 const Cart = () => {
   const { productData } = useSelector((state: StateProps) => state.mojoy);
   const dispatch = useDispatch();
+  const [deliveryOptions, setDeliveryOptions] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [shippingCharge, setShippingCharge] = useState(0);
   const [totalAmt, setTotalAmt] = useState(0);
   const { data: session } = useSession();
 

@@ -93,6 +93,7 @@ export default defineType({
     select: {
       title: "title",
       media: "image",
+      price: "price",
       position: "position",
     },
   },
