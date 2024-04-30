@@ -1,3 +1,4 @@
+//component/carts.ta
 "use client";
 import React, { useEffect, useState } from "react";
 import Container from "./Container";
@@ -92,20 +93,10 @@ const Cart = () => {
                   className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
                   placeholder="Enter your phone number"
                 />
-
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
-                  placeholder="Enter your state"
-                />
-
-                <input
-                  type="text"
+                <textarea
                   id="address"
                   name="address"
-                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
+                  className="border-[1px] border-gray-400 h-[100px] py-2 text-md px-4 font-medium"
                   placeholder="Enter your address"
                 />
               </div>
@@ -124,7 +115,7 @@ const Cart = () => {
                   <div className="flex flex-col items-end">
                     <span className="font-semibold tracking-wide font-titleFont">
                       {/*price on state*/}
-                      <Price amount={2500} />
+                      <Price amount={5000} />
                     </span>
                     <span className="text-xs font-normal">
                       Delivery only in Lagos
@@ -134,7 +125,7 @@ const Cart = () => {
                 <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 text-lg px-4 font-medium">
                   Total
                   <span className="font-bold tracking-wide text-lg font-titleFont">
-                    <Price amount={totalAmt + 2500} />
+                    <Price amount={totalAmt + 5000} />
                   </span>
                 </p>
               </div>

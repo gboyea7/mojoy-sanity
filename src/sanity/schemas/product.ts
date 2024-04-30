@@ -1,3 +1,4 @@
+//schema/product.ts
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -93,8 +94,6 @@ export default defineType({
     select: {
       title: "title",
       media: "image",
-      price: "price",
-      position: "position",
     },
   },
 });

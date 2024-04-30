@@ -50,7 +50,7 @@ const ListProduct = ({ product, bg }: Props) => {
       <div className="flex flex-col lg:mr-2 p-2 lg:p-0 gap-2">
         <div className="flex items-center justify-between">
           <h2 className="text-md text-primary font-bold">
-            {product?.title.substring(0, 70)}...
+            {product?.title.substring(0, 55)}...
           </h2>
         </div>
         <div className="flex items-center gap-2">

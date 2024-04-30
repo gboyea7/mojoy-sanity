@@ -3,7 +3,6 @@ import banner from "./banner";
 import blockContent from "./blockContent";
 import brand from "./brand";
 import category from "./category";
-import delivery from "./delivery";
 import dellbanner from "./dellbanner";
 import hpbanner from "./hpbanner";
 import lenovobanner from "./lenovobanner";
@@ -21,5 +20,4 @@ export const schemaTypes = [
   asusbanner,
   lenovobanner,
   order,
-  delivery,
 ];

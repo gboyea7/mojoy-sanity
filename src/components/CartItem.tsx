@@ -1,3 +1,4 @@
+//component/cartItem.ts
 "use client";
 import React from "react";
 import { ProductProps } from "../../type";

@@ -20,15 +20,15 @@ const Product = ({ product, bg }: Props) => {
   const dispatch = useDispatch();
   return (
     <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500  rounded-lg overflow-hidden group">
-      <div className="w-full h-80 flex items-center justify-center bg-white overflow-hidden">
+      <div className="w-full h-64 md:h-80 flex items-center justify-center bg-white overflow-hidden">
         <div className={`relative ${bg}`}>
           <div>
             <Image
               src={urlFor(product?.image).url()}
               alt="product image"
-              width={700}
-              height={700}
-              className="w-72 h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.2]"
+              width={500}
+              height={500}
+              className="w-52 h-52 md:w-72 md:h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1] lg:group-hover:scale-[1.2]"
             />
           </div>
           <div className="bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300">
@@ -39,21 +39,21 @@ const Product = ({ product, bg }: Props) => {
                   `${product?.title.substring(0, 12)}... added to cart`
                 );
               }}
-              className="bg-gray-800 w-[100px] justify-center text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
+              className="bg-gray-800 md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2 text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
             >
               <span>
-                <AiOutlineShopping />
+                <AiOutlineShopping className="text-md" />
               </span>
-              Cart
+              <p className="hidden lg:flex">Cart</p>
             </button>
             <Link
               href={`/product/${product?.slug?.current}`}
-              className="bg-gray-800 w-[100px] justify-center  text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
+              className="bg-gray-800  md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2  text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
             >
               <span>
-                <BsArrowsFullscreen />
+                <BsArrowsFullscreen className="text-md" />
               </span>
-              Preview
+              <p className="hidden lg:flex">Preview</p>
             </Link>
           </div>
           {product?.quantity && product?.quantity < 5 && (
@@ -62,7 +62,7 @@ const Product = ({ product, bg }: Props) => {
             </p>
           )}
           {product?.isnew && (
-            <div className="absolute top-2 right-2 z-50">
+            <div className="absolute top-2 right-2 z-10">
               <p className="bg-yellow-400 px-4 py-1 text-primary flex justify-center items-center text-sm font-semibold hover:bg-gray-800 hover:text-yellow-400 duration-300 cursor-pointer rounded-md">
                 New
               </p>
@@ -70,9 +70,9 @@ const Product = ({ product, bg }: Props) => {
           )}
         </div>
       </div>
-      <div className="px-2 py-4 flex flex-col gap-1 w-full bg-slate-200">
+      <div className="px-2 py-2 md:py-4 flex flex-col gap-1 w-full bg-slate-200">
         <div className="flex items-center justify-center">
-          <h2 className="text-sm text-primary font-bold">
+          <h2 className="text-xs md:text-sm text-primary font-bold">
             {product?.title.substring(0, 55)}...
           </h2>
         </div>
@@ -83,16 +83,16 @@ const Product = ({ product, bg }: Props) => {
               {product?.brand}
             </span>
           </p>
-          <div className="flex flex-col items-center justify-center">
-            <p className="font-medium line-through decoration-red-500 text-xs">
+          <div className="flex flex-col items-end md:items-center justify-center">
+            <p className="font-normal md:font-medium line-through decoration-red-500 text-xs">
               <Price amount={product?.rowprice} />
             </p>
-            <p className="font-bold text-md">
+            <p className="font-bold text-sm md:text-md">
               <Price amount={product?.price} />
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-center md:justify-start gap-1">
           {/* Loop to render stars based on the rating */}
           {[...Array(product.ratings)].map((_, index) => (
             <MdOutlineStarPurple500

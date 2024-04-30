@@ -1,3 +1,4 @@
+//redux/mojoySlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductProps } from "../../type";
 

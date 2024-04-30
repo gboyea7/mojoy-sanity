@@ -84,12 +84,12 @@ const ShopPage = () => {
   };
 
   return (
-    <div className="flex flex-col w-full my-4 lg:my-10 px-2 lg:px-16 overflow-hidden">
-      <div className="flex  lg:items-center justify-between  gap-2 lg:pb-10 pb-4">
-        <div className="flex flex-col gap-2 lg:flex-row w-full lg:w-1/2 px-2 lg:items-center items-start">
+    <div className="flex flex-col w-full my-4 lg:my-10 px-1 lg:px-10 overflow-hidden">
+      <div className="flex items-center justify-between  gap-2 lg:pb-10 pb-4">
+        <div className="flex  gap-2 w-full lg:w-1/2 px-2 items-center">
           <div> Filter:</div>
           <select
-            className="px-2 py-1 border border-gray-300 rounded-md"
+            className="px-1 py-1 border border-gray-300 rounded-md"
             onChange={handleCategoryChange}
           >
             <option value="">All Categories</option>
@@ -100,7 +100,7 @@ const ShopPage = () => {
             ))}
           </select>
           <select
-            className="px-2 py-1 border border-gray-300 rounded-md"
+            className="px-1 py-1 border border-gray-300 rounded-md"
             onChange={handleBrandChange}
           >
             <option value="">All Brands</option>
@@ -111,7 +111,7 @@ const ShopPage = () => {
             ))}
           </select>
         </div>
-        <div className="flex w-full lg:w-1/2 justify-end gap-4">
+        <div className="flex w-full lg:w-1/2 justify-end lg:gap-4 gap-2">
           <span
             onClick={() => {
               setShowGrid(true);
@@ -134,14 +134,14 @@ const ShopPage = () => {
               showList
                 ? "bg-primary text-yellow-400 border-[1px] border-yellow-400"
                 : "border-[1px] border-gray-300 text-[#737373]"
-            } w-8 h-8 text-base flex items-center justify-center cursor-pointer listView`}
+            }  w-8 h-8 text-base flex items-center justify-center cursor-pointer listView`}
           >
             <ImList />
           </span>
         </div>
       </div>
       {isLoading ? (
-        <div className="loader-container h-[300px] lg:h-[360px]">
+        <div className="loader-container h-[300px] md:h-[360px]">
           <div className="loader"></div>
         </div>
       ) : // Existing product display logic...
@@ -159,7 +159,7 @@ const ShopPage = () => {
           </p>
         </div>
       ) : showGrid ? (
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mr-5">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 lg:gap-10">
           {currentProducts.map((item: ProductProps) => (
             <Product key={item._id} product={item} />
           ))}
