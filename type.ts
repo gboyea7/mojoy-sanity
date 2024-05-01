@@ -46,5 +46,6 @@ export interface StateProps {
   mojoy: {
     productData: ProductProps[];
     categoryData: CategoryProps[];
+    totalAmount: number; // Add totalAmount property
   };
 }

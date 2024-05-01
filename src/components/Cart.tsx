@@ -1,6 +1,6 @@
 //component/carts.ta
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Container from "./Container";
 import { useDispatch, useSelector } from "react-redux";
 import { StateProps } from "../../type";
@@ -15,41 +15,20 @@ import Price from "./Price";
 import { useSession } from "next-auth/react";
 
 const Cart = () => {
-  const { productData } = useSelector((state: StateProps) => state.mojoy);
+  const { productData, totalAmount } = useSelector(
+    (state: StateProps) => state.mojoy
+  );
   const dispatch = useDispatch();
-  const [totalAmt, setTotalAmt] = useState(0);
   const { data: session } = useSession();
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
-  useEffect(() => {
-    const calculateTotal = () => {
-      let price = 0;
-      productData.forEach((item) => {
-        price += item?.price * item?.quantity;
-      });
-      return price;
-    };
-
-    const total = calculateTotal();
-    setTotalAmt(total);
-  }, [productData]);
-
-  const [cartData, setCartData] = useState({
+  const [checkoutData, setCheckoutData] = useState({
     products: productData,
-    totalAmount: totalAmt, // Initialize totalAmount here
-    phone: "",
-    address: "",
+    totalAmount: totalAmount, // Initialize totalAmount here
+    phone: phone,
+    address: address,
   });
-
-  const handlePhoneChange = (e: { target: { value: any } }) => {
-    setCartData((prevCartData) => ({ ...prevCartData, phone: e.target.value })); // Update cartData while maintaining totalAmount
-  };
-
-  const handleAddressChange = (e: { target: { value: any } }) => {
-    setCartData((prevCartData) => ({
-      ...prevCartData,
-      address: e.target.value,
-    })); // Update cartData while maintaining totalAmount
-  };
 
   const handleReset = () => {
     const confirmed = window.confirm("Are you sure to reset your Cart?");
@@ -58,19 +37,52 @@ const Cart = () => {
   };
 
   const createCheckout = async () => {
+    // Check if phone number has 11 digits
+    if (phone.length !== 11) {
+      toast.error("Please enter a valid phone number with 11 digits");
+      return;
+    }
+
+    // Check if address has at least 15 characters
+    if (address.length < 15) {
+      toast.error("Please enter an address with at least 15 characters");
+      return;
+    }
+
+    // Proceed to checkout if phone number and address are valid
     if (session?.user) {
-      // ... your existing logic for sending cartData to the backend ...
+      const checkoutData = {
+        products: productData,
+        totalAmount: totalAmount,
+        phone: phone,
+        address: address,
+      };
 
-      // Save cart data (You might want to use a database or local storage)
-      localStorage.setItem("cartData", JSON.stringify(cartData));
+      try {
+        const response = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(checkoutData),
+        });
 
-      // Log cart data
-      console.log("Cart Data:", cartData);
+        if (response.ok) {
+          const data = await response.json();
+          window.location.href = data.redirect_url; // Redirect to Paystack checkout
+        } else {
+          throw new Error("Failed to create checkout");
+        }
+      } catch (error) {
+        console.error("Error creating checkout:", error);
+        toast.error("Failed to create checkout. Please try again later.");
+      }
+      // Log checkout data
+      console.log("Checkout Data:", checkoutData);
     } else {
       // ... error handling for users who are not logged in ...
       toast.error("Please sign in to make Checkout");
     }
   };
+
   return (
     <Container className="">
       {productData?.length > 0 ? (
@@ -107,8 +119,8 @@ const Cart = () => {
                   name="phone"
                   className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
                   placeholder="Enter your phone number"
-                  onChange={handlePhoneChange}
-                  value={cartData.phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
                   required
                 />
                 <textarea
@@ -116,8 +128,8 @@ const Cart = () => {
                   name="address"
                   className="border-[1px] border-gray-400 h-[100px] py-2 text-md px-4 font-medium"
                   placeholder="Enter your address"
-                  onChange={handleAddressChange}
-                  value={cartData.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
                   required
                 />
               </div>
@@ -128,7 +140,7 @@ const Cart = () => {
                 <p className="flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 text-lg px-4 font-medium">
                   Subtotal{" "}
                   <span>
-                    <Price amount={totalAmt} />
+                    <Price amount={totalAmount - 5000} />
                   </span>
                 </p>
                 <p className="flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 text-lg px-4 font-medium">
@@ -146,7 +158,7 @@ const Cart = () => {
                 <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 text-lg px-4 font-medium">
                   Total
                   <span className="font-bold tracking-wide text-lg font-titleFont">
-                    <Price amount={totalAmt + 5000} />
+                    <Price amount={totalAmount} />
                   </span>
                 </p>
               </div>
