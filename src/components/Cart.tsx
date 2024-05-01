@@ -17,20 +17,39 @@ import { useSession } from "next-auth/react";
 const Cart = () => {
   const { productData } = useSelector((state: StateProps) => state.mojoy);
   const dispatch = useDispatch();
-  const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [selectedState, setSelectedState] = useState("");
-  const [shippingCharge, setShippingCharge] = useState(0);
   const [totalAmt, setTotalAmt] = useState(0);
   const { data: session } = useSession();
 
   useEffect(() => {
-    let price = 0;
-    productData.map((item) => {
-      price += item?.price * item?.quantity;
+    const calculateTotal = () => {
+      let price = 0;
+      productData.forEach((item) => {
+        price += item?.price * item?.quantity;
+      });
       return price;
-    });
-    setTotalAmt(price);
+    };
+
+    const total = calculateTotal();
+    setTotalAmt(total);
   }, [productData]);
+
+  const [cartData, setCartData] = useState({
+    products: productData,
+    totalAmount: totalAmt, // Initialize totalAmount here
+    phone: "",
+    address: "",
+  });
+
+  const handlePhoneChange = (e: { target: { value: any } }) => {
+    setCartData((prevCartData) => ({ ...prevCartData, phone: e.target.value })); // Update cartData while maintaining totalAmount
+  };
+
+  const handleAddressChange = (e: { target: { value: any } }) => {
+    setCartData((prevCartData) => ({
+      ...prevCartData,
+      address: e.target.value,
+    })); // Update cartData while maintaining totalAmount
+  };
 
   const handleReset = () => {
     const confirmed = window.confirm("Are you sure to reset your Cart?");
@@ -40,19 +59,15 @@ const Cart = () => {
 
   const createCheckout = async () => {
     if (session?.user) {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: productData,
-          email: session?.user?.email,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        window.location.href = data.redirect_url; // Redirect to Paystack checkout
-      }
+      // ... your existing logic for sending cartData to the backend ...
+
+      // Save cart data (You might want to use a database or local storage)
+      localStorage.setItem("cartData", JSON.stringify(cartData));
+
+      // Log cart data
+      console.log("Cart Data:", cartData);
     } else {
+      // ... error handling for users who are not logged in ...
       toast.error("Please sign in to make Checkout");
     }
   };
@@ -90,14 +105,20 @@ const Cart = () => {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
+                  className="border-[1px] border-gray-400  py-2 text-md px-4 font-medium"
                   placeholder="Enter your phone number"
+                  onChange={handlePhoneChange}
+                  value={cartData.phone}
+                  required
                 />
                 <textarea
                   id="address"
                   name="address"
                   className="border-[1px] border-gray-400 h-[100px] py-2 text-md px-4 font-medium"
                   placeholder="Enter your address"
+                  onChange={handleAddressChange}
+                  value={cartData.address}
+                  required
                 />
               </div>
             </div>
@@ -131,7 +152,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-end">
                 <button
-                  //  onClick={createCheckout}
+                  onClick={createCheckout}
                   className="w-52 h-10 bg-primary text-black bg-yellow-400 hover:text-yellow-400 hover:bg-black duration-300"
                 >
                   Proceed to Checkout
