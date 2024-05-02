@@ -35,7 +35,7 @@ const Footer = () => {
           <div className="flex flex-col lg:w-1/3 lg:items-start items-center justify-center gap-2">
             <Image src={whitelogo} alt="Logo" className="w-24 lg:w-36" />
             <p className="text-center hover:text-yellow-400 lg:text-left">
-              13 Oshitelu St, Computer Village ,<br /> 101233 Lagos, Nigeria
+              13 Oshitelu Street Lagos, Nigeria
             </p>
             <div className="flex gap-4">
               {socials.map((social, index) => (
