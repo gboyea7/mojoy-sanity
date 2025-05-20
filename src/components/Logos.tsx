@@ -66,7 +66,7 @@ const Logos = () => {
         className="flex flex-col text-center mt-4 mx-10"
       >
         <h1 className="text-2xl lg:text-3xl font-medium">
-          We proudly work with:
+          We proudly work with
         </h1>
         <p className="text-gray-600 text-lg">
           Our brand partners include a diverse range of industry-leading

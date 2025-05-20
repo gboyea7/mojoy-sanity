@@ -50,16 +50,16 @@ const ListProduct = ({ product, bg }: Props) => {
       <div className="flex flex-col lg:mr-2 p-2 lg:p-0 gap-2">
         <div className="flex items-center justify-between">
           <h2 className="text-md text-primary font-bold">
-            {product?.title.substring(0, 55)}...
+            {(product?.title ?? "").substring(0, 55)}...
           </h2>
         </div>
         <div className="flex items-center gap-2">
           <p className="text-[#767676] text-xs line-through">
-            <Price amount={product?.rowprice} />
+            <Price amount={product?.rowprice ?? 0} />
           </p>
           <p className="font-semibold">
             {" "}
-            <Price amount={product?.price} />
+            <Price amount={product?.price ?? 0} />
           </p>
         </div>
         <p className="text-sm max-w-2xl">{product?.description}</p>
@@ -85,7 +85,7 @@ const ListProduct = ({ product, bg }: Props) => {
             onClick={() => {
               dispatch(addToCart(product));
               toast.success(
-                `${product?.title.substring(0, 12)}... added to cart`
+                `${(product?.title ?? "").substring(0, 12)}... added to cart`
               );
             }}
             className="bg-gray-800 w-[100px] justify-center text-gray-200 px-2 py-2 text-xs rounded-lg flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"

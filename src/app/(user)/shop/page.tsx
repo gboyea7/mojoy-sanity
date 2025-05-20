@@ -8,6 +8,7 @@ import { BsGridFill } from "react-icons/bs";
 import { ImList } from "react-icons/im";
 import Image from "next/image";
 import noproduct from "../../../assets/noproduct.png";
+import PriceRange from "@/components/PriceRange";
 
 const ShopPage = () => {
   const [showGrid, setShowGrid] = useState(true);
@@ -20,6 +21,15 @@ const ShopPage = () => {
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedBrand, setSelectedBrand] = useState<string>("");
+  // New state for price range
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({
+    min: 0,
+    max: Infinity,
+  });
+  const [priceBounds, setPriceBounds] = useState<{ min: number; max: number }>({
+    min: 0,
+    max: 1000, // Default max, will be updated
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +49,12 @@ const ShopPage = () => {
           new Set(data.map((item: { brand: string }) => item.brand))
         );
         setBrands(uniqueBrands);
+        // Calculate price boundaries
+        const prices = data.map((item: ProductProps) => item.price);
+        const minPrice = Math.floor(Math.min(...prices));
+        const maxPrice = Math.ceil(Math.max(...prices));
+        setPriceBounds({ min: minPrice, max: maxPrice });
+        setPriceRange({ min: minPrice, max: maxPrice });
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
@@ -52,16 +68,16 @@ const ShopPage = () => {
   }, []);
 
   const filteredProducts = productData.filter((product: ProductProps) => {
-    if (selectedCategory && selectedBrand) {
-      return (
-        product.category === selectedCategory && product.brand === selectedBrand
-      );
-    } else if (selectedCategory) {
-      return product.category === selectedCategory;
-    } else if (selectedBrand) {
-      return product.brand === selectedBrand;
-    }
-    return true;
+    const matchesCategory = selectedCategory
+      ? product.category === selectedCategory
+      : true;
+    const matchesBrand = selectedBrand ? product.brand === selectedBrand : true;
+    const matchesPrice =
+      typeof product.price === "number" &&
+      product.price >= priceRange.min &&
+      product.price <= priceRange.max;
+
+    return matchesCategory && matchesBrand && matchesPrice;
   });
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -82,34 +98,55 @@ const ShopPage = () => {
     setSelectedBrand(e.target.value);
     setCurrentPage(1); // Reset page when brand changes
   };
+  // Handle price range change
+  const handlePriceChange = (min: number, max: number) => {
+    setPriceRange({ min, max });
+    setCurrentPage(1); // Reset page on price change
+  };
 
   return (
     <div className="flex flex-col w-full my-4 lg:my-10 px-1 lg:px-10 overflow-hidden">
-      <div className="flex items-center justify-between  gap-2 lg:pb-10 pb-4">
-        <div className="flex  gap-2 w-full lg:w-1/2 px-2 items-center">
+      <div className="flex items-center justify-between gap-2 lg:pb-10 pb-4">
+        <div className="flex md:flex-row flex-col md:space-y-0 space-y-3 justify-between space-x-6 items-start md:items-center">
           <div> Filter:</div>
-          <select
-            className="px-1 py-1 border border-gray-300 rounded-md"
-            onChange={handleCategoryChange}
-          >
-            <option value="">All Categories</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          <select
-            className="px-1 py-1 border border-gray-300 rounded-md"
-            onChange={handleBrandChange}
-          >
-            <option value="">All Brands</option>
-            {brands.map((brand, index) => (
-              <option key={index} value={brand}>
-                {brand}
-              </option>
-            ))}
-          </select>
+          <div className="w-full">
+            <select
+              className="px-1 py-1 border border-gray-300 rounded-md"
+              onChange={handleCategoryChange}
+            >
+              <option value="">All Categories</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full">
+            <select
+              className="px-1 py-1 border border-gray-300 rounded-md"
+              onChange={handleBrandChange}
+            >
+              <option value="">All Brands</option>
+              {brands.map((brand, index) => (
+                <option key={index} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="w-full">
+            <h1 className="font-medium p-2">Price Range</h1>
+            {/* Price Range Component */}
+            <PriceRange
+              minPrice={priceBounds.min}
+              maxPrice={priceBounds.max}
+              currentMin={priceRange.min}
+              currentMax={priceRange.max}
+              onPriceChange={handlePriceChange}
+            />
+          </div>
         </div>
         <div className="flex w-full lg:w-1/2 justify-end lg:gap-4 gap-2">
           <span

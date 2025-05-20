@@ -4,6 +4,7 @@ import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import "slick-carousel/slick/slick.css";
 import Footer from "../../components/Footer";
+import NavBanner from "@/components/NavBanner";
 import Layout from "@/components/Layout";
 
 export const metadata = {
@@ -26,8 +27,9 @@ export default function RootLayout({
           <meta name="description" content={metadata.description || ""} />
           <link rel="icon" href={metadata.favicon} />
         </Head>
-        <body className="font-display">
+        <body className="font-poppins bg-white text-gray-900 antialiased">
           <Layout>
+            <NavBanner />
             <Navbar />
             {children}
             <Footer />

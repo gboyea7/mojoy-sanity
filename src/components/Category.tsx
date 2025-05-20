@@ -21,15 +21,18 @@ const Category = ({ categories }: Props) => {
         viewport={{ once: true }}
         className="my-2 lg:my-4 ml-5 lg:ml-10"
       >
-        <h1 className="text-2xl text-center lg:text-3xl font-medium">
-          Category
-        </h1>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl text-center lg:text-3xl font-medium">
+            Category
+          </h1>
+          <hr className="border-t-2 border-[#FACA15] my-3 shadow-sm w-24" />
+        </div>
       </motion.div>
-      <div className="grid grid-cols-2 md:grid-cols-5 h-[400px] lg:mx-32 mx-4 gap-4 lg:gap-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 h-[400px] lg:mx-24 mx-4 gap-4 lg:gap-18">
         {categories.map((item, index) => (
           <div
             key={index}
-            className="relative overflow-hidden rounded-tl-3xl rounded-br-3xl shadow-md cursor-none hover:-translate-y-2 group"
+            className="relative overflow-hidden rounded-md shadow-md cursor-none hover:-translate-y-2 group"
           >
             <Image
               src={urlFor(item?.image).url()} // Assuming the images are in the public/images directory
@@ -39,8 +42,8 @@ const Category = ({ categories }: Props) => {
               className="object-cover w-full h-full"
             />
 
-            <div className="absolute inset-0 bg-black opacity-30 transition-opacity duration-300 ease-in-out group-hover:opacity-80"></div>
-            <p className="absolute inset-0 flex items-center justify-center text-center text-white font-light text-md lg:text-xl pointer-events-none">
+            <div className="absolute inset-0 bg-black transition-opacity duration-300 ease-in-out opacity-80"></div>
+            <p className="absolute inset-0 flex items-center justify-center text-center text-white font-light text-md lg:text-lg pointer-events-none uppercase">
               {item?.title}
             </p>
           </div>

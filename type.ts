@@ -1,31 +1,31 @@
 //type.ts
 export interface ProductProps {
   _id: string;
-  _type: string;
-  _rev: string;
-  _createdAt: string;
-  price: number;
-  rowprice: number;
-  title: string;
-  position: string;
-  ratings: number;
-  description: string;
-  slug: {
+  _type?: string;
+  _rev?: string;
+  _createdAt?: string;
+  price?: number;
+  rowprice?: number;
+  title?: string;
+  position?: string;
+  ratings?: number;
+  description?: string;
+  slug?: {
     current: string;
     _type: string;
   };
-  image: {
+  image?: {
     _type: string;
     asset: {
       _ref: string;
       _type: string;
     };
   };
-  category: string;
-  brand: string;
-  isnew: boolean;
-  body: any;
-  quantity: number;
+  category?: string;
+  brand?: string;
+  isnew?: boolean;
+  body?: any;
+  quantity?: any; // Add quantity property
 }
 export interface CategoryProps {
   _id: string;

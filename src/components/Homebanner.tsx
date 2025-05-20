@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const HomeBanner = () => {
   return (
-    <div className="flex bg-gray-800 w-full py-20 lg:py-2">
+    <div className="flex bg-[#070E20] w-full py-20 lg:py-2">
       <div className="w-full flex flex-col lg:flex-row items-center justify-between px-5 lg:px-20">
         {/* Text side */}
         <motion.div
@@ -20,10 +20,10 @@ const HomeBanner = () => {
           viewport={{ once: true }}
           className="flex flex-col text-white lg:ml-28 items-center lg:items-start lg:text-left text-center gap-2 justify-center"
         >
-          <h2 className="text-3xl font-semibold mb-2 lg:text-5xl text-yellow-500">
+          <h2 className="text-3xl font-semibold mb-2 lg:text-5xl text-[EDF0EE]">
             Thinking of you!
           </h2>
-          <p className="text-md lg:text-xl font-light">
+          <p className="text-md lg:text-lg font-thin">
             Get ready for unbeatable deals on your favorite tech gear!
           </p>
           <p className="text-md lg:text-xl font-medium">
@@ -31,11 +31,10 @@ const HomeBanner = () => {
             products.
           </p>
 
-          <Link
-            href="/shop"
-            className="bg-white text-yellow-500 px-6 py-1 rounded-xl font-bold text-lg shadow-lg hover:bg-yellow-500 hover:text-white transition duration-300"
-          >
-            <p className="animate-pulse">Shop Now &#8594;</p>
+          <Link href="/shop">
+            <button className="bg-[#FACA15] font-medium text-black text-sm py-2 px-6 rounded-md hover:text-yellow-400 hover:bg-black duration-300 focus:outline-none focus:ring-offset-2 w-full md:w-auto">
+              Shop Now &#8594;
+            </button>
           </Link>
         </motion.div>
         {/* Image side */}

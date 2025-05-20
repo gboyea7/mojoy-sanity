@@ -6,34 +6,59 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
+      name: "userEmail",
+      title: "User Email",
       type: "string",
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "string",
-    }),
-    defineField({
-      name: "message",
-      title: "Message",
-      type: "string",
-    }),
-    defineField({
-      name: "status",
-      title: "Status",
-      type: "string",
-    }),
-    defineField({
-      name: "method",
-      title: "Confirmation method",
-      type: "string",
+      validation: (Rule) => Rule.required().email(),
     }),
     defineField({
       name: "amount",
       title: "Amount",
       type: "number",
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: "state",
+      title: "State",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "lga",
+      title: "LGA",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "reference",
+      title: "Paystack Reference",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "deliveryType",
+      title: "Delivery Type",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "status",
+      title: "Status",
+      type: "string",
+      options: {
+        list: [
+          { title: "Pending", value: "pending" },
+          { title: "Completed", value: "completed" },
+          { title: "Failed", value: "failed" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 });

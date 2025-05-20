@@ -16,6 +16,12 @@ const navlink = [
   { href: "/contact", title: "Contact Us" },
   { href: "/about", title: "About Us" },
 ];
+const productLink = [
+  { href: "/hp", title: "Hp" },
+  { href: "/dell", title: "Dell" },
+  { href: "/lenovo", title: "Lenovo" },
+  { href: "/asus", title: "Asus" },
+];
 
 const socials = [
   {
@@ -28,8 +34,8 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer className=" bottom-0 w-full bg-gray-800 text-white">
-      <div className="container mx-auto  p-4 lg:px-20 lg:py-14">
+    <footer className=" bottom-0 w-full bg-[#070E20] text-white font-poppins">
+      <div className="container mx-auto p-4 lg:px-20 lg:py-14">
         <div className="flex flex-col lg:flex-row lg:gap-10 gap-5">
           {/*Info*/}
           <div className="flex flex-col lg:w-1/3 lg:items-start items-center justify-center gap-2">
@@ -47,9 +53,22 @@ const Footer = () => {
               ))}
             </div>
           </div>
+          {/*Our Products*/}
+          <div className="flex flex-col lg:w-1/3 lg:items-start items-center  gap-2">
+            <h1 className="text-2xl font-medium">Our Products</h1>
+            <div className="flex flex-col gap-2">
+              {productLink.map((link, index) => (
+                <Link key={index} href={link.href}>
+                  <div className="text-white hover:text-yellow-400 text-sm">
+                    {link.title}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
           {/*contact info*/}
           <div className="flex flex-col lg:w-1/3 lg:items-start items-center  gap-2">
-            <h1 className="text-2xl font-mexdium">Contact Us</h1>
+            <h1 className="text-2xl font-medium">Contact Us</h1>
             <div className="flex flex-col gap-2">
               {phone.map((phone, index) => (
                 <Link key={index} href={phone.number}>
@@ -62,7 +81,7 @@ const Footer = () => {
           </div>
           {/*Info*/}
           <div className="flex flex-col lg:w-1/3 lg:items-start items-center  gap-2">
-            <h1 className="text-2xl font-mexdium">Information</h1>
+            <h1 className="text-2xl font-medium">Quick Links</h1>
             <div className="flex flex-col gap-2">
               {navlink.map((link, index) => (
                 <Link key={index} href={link.href}>
@@ -75,14 +94,15 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center border-b border-b-gray-300 justify-center lg:mx-32 mx-10">
+      {/* <div className="flex items-center border-b border-b-gray-300 justify-center lg:mx-32 mx-10">
         <p className="text-white opacity-70 text-sm font-light">
-          ©Mojoy ICL 2024 — All Rights Reserved.
+          ©Mojoy ICL 2024 — All Rights Not Reserved.
         </p>
-      </div>
-      <div className="flex items-center justify-center">
-        <p className="text-white opacity-40 text-sm font-light">
-          Powered by 93-dev
+      </div> */}
+      <div className="flex flex-col items-center justify-center py-4">
+        <hr className="border-t-1 border-white my-3 shadow-sm w-[85%]" />
+        <p className="text-sm text-center font-normal">
+          ©Mojoy ICL 2025 — All Rights Reserved.
         </p>
       </div>
     </footer>

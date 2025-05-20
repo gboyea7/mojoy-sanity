@@ -22,9 +22,15 @@ export const mojoySlice = createSlice({
         (item) => item._id === _id
       );
 
-      if (existingProductIndex !== -1) {
-        // If product already exists, increase quantity
-        state.productData[existingProductIndex].quantity++;
+      if (
+        Array.isArray(state?.productData) &&
+        existingProductIndex !== -1 &&
+        existingProductIndex < state?.productData?.length &&
+        state.productData[existingProductIndex] &&
+        typeof state?.productData[existingProductIndex].quantity === "number"
+      ) {
+        // If product exists and has a quantity, increase it
+        state.productData[existingProductIndex].quantity += 1;
       } else {
         const productToAdd = { ...action.payload, quantity: 1 }; // Set quantity to 1
         state.productData.push(productToAdd);
@@ -38,7 +44,9 @@ export const mojoySlice = createSlice({
       const existingProduct = state.productData.find(
         (item) => item._id === _id
       );
-      existingProduct && existingProduct.quantity++;
+      if (existingProduct && typeof existingProduct.quantity === "number") {
+        existingProduct.quantity++;
+      }
 
       // Update total amount
       state.totalAmount = calculateTotal(state.productData) + 5000;
@@ -53,7 +61,9 @@ export const mojoySlice = createSlice({
           (item) => item._id !== _id
         );
       } else {
-        existingProduct && existingProduct.quantity--;
+        if (existingProduct && typeof existingProduct.quantity === "number") {
+          existingProduct.quantity--;
+        }
       }
 
       // Update total amount
@@ -76,7 +86,7 @@ export const mojoySlice = createSlice({
 
 const calculateTotal = (productData: ProductProps[]): number => {
   return productData.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (item.price ?? 0) * (item.quantity ?? 0),
     0
   );
 };

@@ -36,7 +36,9 @@ const Product = ({ product, bg }: Props) => {
               onClick={() => {
                 dispatch(addToCart(product));
                 toast.success(
-                  `${product?.title.substring(0, 12)}... added to cart`
+                  `${
+                    product?.title?.substring(0, 12) ?? "Product"
+                  }... added to cart`
                 );
               }}
               className="bg-gray-800 md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2 text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
@@ -73,22 +75,22 @@ const Product = ({ product, bg }: Props) => {
       <div className="px-2 py-2 md:py-4 flex flex-col gap-1 w-full bg-slate-200">
         <div className="flex items-center justify-center">
           <h2 className="text-xs md:text-sm text-primary font-bold">
-            {product?.title.substring(0, 55)}...
+            {(product?.title ?? "No Title").substring(0, 55)}...
           </h2>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-[#767676] text-sm">
-            a product by{" "}
+            Product of{" "}
             <span className="font-semibold text-gray-950">
               {product?.brand}
             </span>
           </p>
           <div className="flex flex-col items-end md:items-center justify-center">
             <p className="font-normal md:font-medium line-through decoration-red-500 text-xs">
-              <Price amount={product?.rowprice} />
+              <Price amount={product?.rowprice ?? 0} />
             </p>
             <p className="font-bold text-sm md:text-md">
-              <Price amount={product?.price} />
+              <Price amount={product?.price ?? 0} />
             </p>
           </div>
         </div>

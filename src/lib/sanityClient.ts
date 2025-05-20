@@ -7,6 +7,15 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
 const token = process.env.SANITY_API_TOKEN;
 
+// Server-side client with write permissions
+export const sClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: "production",
+  apiVersion: "2023-05-03",
+  token: process.env.SANITY_WRITE_TOKEN, // Write-capable token
+  useCdn: false, // Disable CDN for mutations
+});
+
 export const client = createClient({
   projectId,
   dataset,

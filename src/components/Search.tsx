@@ -14,8 +14,10 @@ const Search = () => {
       const searchProducts = async () => {
         try {
           const productData = await products();
-          const filteredResults = productData.filter((product: ProductProps) =>
-            product.title.toLowerCase().includes(searchQuery.toLowerCase())
+          const filteredResults = productData.filter(
+            (product: ProductProps) =>
+              typeof product.title === "string" &&
+              product.title.toLowerCase().includes(searchQuery.toLowerCase())
           );
           setSearchResults(filteredResults.slice(0, 10));
         } catch (error) {
@@ -35,7 +37,7 @@ const Search = () => {
 
   return (
     <div className="relative w-full flex items-center justify-center mx-2">
-      <div className="flex w-full items-center justify-between border-[1px] border-gray-200  px-5 lg:mx-20  rounded-md  lg:min-w-[600px] min-w-[320px] h-10 text-base text-primary">
+      <div className="flex w-full items-center justify-between border-[1px] border-gray-200  px-5 lg:mx-20  rounded-md  lg:min-w-[600px] min-w-[320px] h-10 text-sm text-primary">
         <input
           type="text"
           placeholder="Search your products here..."
@@ -49,7 +51,7 @@ const Search = () => {
             className="w-5 h-5 hover:cursor-pointer hover:text-yellow-400"
           />
         ) : (
-          <IoSearchOutline className="w-5 h-5 hover:cursor-pointer hover:text-yellow-400" />
+          <IoSearchOutline className="w-5 h-5 hover:cursor-pointer text-[#FACA15]" />
         )}
       </div>
 

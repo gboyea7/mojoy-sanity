@@ -5,7 +5,8 @@ import { ProductProps } from "../../type";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanityClient";
 import Link from "next/link";
-import { ImCross } from "react-icons/im";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 import Price from "./Price";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -23,16 +24,18 @@ const CartItem = ({ item }: Props) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-full grid grid-cols-5 mb-4 border py-2">
-      <div className="flex col-span-5 md:col-span-2 items-center gap-4 ml-4">
-        <ImCross
+    <div className="w-full grid grid-cols-5 mb-4 border py-1">
+      <div className="flex col-span-5 md:col-span-2 items-center w-[320px] px-6">
+        <RiDeleteBin6Line
           onClick={() => {
             dispatch(deleteProduct(item._id));
             toast.success(
-              `${item?.title.substring(0, 12)}... deleted from cart`
+              `${
+                item?.title ? item.title.substring(0, 12) : "Product"
+              }... deleted from cart`
             );
           }}
-          className="text-primary hover:text-red-500 cursor-pointer duration-300"
+          className="text-primary text-xl text-red-500 cursor-pointer duration-300 flex md:hidden"
         />
         <Link href={`/product/${item?.slug?.current}`}>
           <Image
@@ -43,11 +46,15 @@ const CartItem = ({ item }: Props) => {
             className="w-32 h-32 object-contain"
           />
         </Link>
-        <h1 className="font-semibold">{item?.title.substring(0, 20)}</h1>
+        <Link href={`/product/${item?.slug?.current}`}>
+          <h1 className="font-medium text-md">
+            {(item?.title ?? "Product").substring(0, 20)}
+          </h1>
+        </Link>
       </div>
-      <div className="col-span-5 md:col-span-3 flex items-center justify-between py-4 md:py-0 px-4 lg:px-0">
+      <div className="w-full col-span-5 md:col-span-3 flex items-center justify-between py-4 md:py-0 px-4 lg:px-0 md:-ml-24 ml-0 md:w-[600px]">
         <p className="flex w-1/3 items-center text-lg font-semibold">
-          <Price amount={item?.price} />
+          <Price amount={item?.price ?? 0} />
         </p>
         <div className="flex w-1/3 items-center gap-6 text-lg">
           <span
@@ -73,8 +80,20 @@ const CartItem = ({ item }: Props) => {
           </span>
         </div>
         <div className="w-1/3 flex items-center font-titleFont font-bold text-lg">
-          <Price amount={item.quantity * item?.price} />
+          <Price amount={(item?.quantity ?? 0) * (item?.price ?? 0)} />
         </div>
+        <RiDeleteBin6Line
+          onClick={() => {
+            dispatch(deleteProduct(item._id));
+            toast.success(
+              `${(item?.title ?? "Product").substring(
+                0,
+                12
+              )}... deleted from cart`
+            );
+          }}
+          className="text-primary text-2xl text-red-500 cursor-pointer duration-300 md:flex hidden"
+        />
       </div>
       <Toaster
         position="bottom-right"

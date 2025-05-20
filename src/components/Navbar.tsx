@@ -38,15 +38,17 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-hidden ">
       {/*Top nav*/}
       <div className="w-full bg-[#FAFAFA] border-b border-b-gray-100 md:block hidden">
         <ul className="flex items-center justify-end text-xs text-[#333333] font-light px-16 h-8 bg-[#FAFAFA]">
-          <li className="border-r-gray-400 px-3">Contact us:</li>
-          <li className="border-r border-r-gray-400 px-3">
+          <li className="border-r-gray-400 px-3 -mr-4 font-semibold">
+            Contact us:
+          </li>
+          <li className="border-r border-r-gray-400 px-3 font-normal font-montserrat">
             (+234) 802-363-6583
           </li>
-          <li className="border-r border-r-gray-400 px-3">
+          <li className="border-r border-r-gray-400 px-3 font-normal font-montserrat">
             mojoyicl@gmail.com
           </li>
           <li className="pl-5 text-[17px] hover:text-yellow-500 cursor-pointer">
@@ -72,13 +74,13 @@ const Navbar = () => {
           isScrolled ? "scrolled" : ""
         }`}
       >
+        {/*Logo Nav*/}
         <div className="w-full lg:h-20 h-16 bg-white border-b-2 border-b-gray-100">
-          <nav className="flex items-center justify-between gap-2 h-full max-w-screen-xl mx-auto px-4 xl:px-0">
+          <nav className="flex items-center justify-between gap-2 h-full max-w-screen-xl mx-auto px-4 md:px-16">
             {/*icons*/}
             <div className="lg:hidden block">
               <NavIcon />
             </div>
-
             {/*Logo*/}
             <Link href={"/"}>
               <Image src={logo} alt="logo" className="w-24" />
@@ -86,11 +88,11 @@ const Navbar = () => {
             <div className="hidden lg:flex">
               <Search />
             </div>
-            {/*icons*/}
+            {/*Account*/}
             <div className="hidden lg:flex">
               <NavIcon />
             </div>
-            {/*menu*/}
+            {/*menu btn*/}
             <div className="inline-flex md:hidden">
               <HiMenuAlt2
                 onClick={toggleMenu}
@@ -105,13 +107,13 @@ const Navbar = () => {
       </div>
 
       {/*Menu list*/}
-      <div className="w-full h-10 bg-[#FAFAFA]  md:block hidden">
+      <div className="w-full h-10 bg-[#F3F4F6] font-montserrat md:block hidden">
         <div className="flex gap-10 h-full items-center justify-center mx-auto">
           {navBarlist.map((item) => (
             <Link
               href={item?.link}
               key={item?.link}
-              className={`flex items-center text-md font-light hover:font-medium text-gray-800 hover:text-yellow-400 hover:underline underline-offset-4 decoration-[1px] ${
+              className={`flex items-center text-xs uppercase font-medium hover:font-medium text-[#333] hover:text-yellow-400 hover:underline underline-offset-8 decoration-[#FACA15] decoration-[1px] ${
                 pathname === item?.link &&
                 "text-gray-800 hover:text-gray-800 underline font-medium cursor-default"
               }`}

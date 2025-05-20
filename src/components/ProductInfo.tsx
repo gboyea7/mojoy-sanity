@@ -15,16 +15,16 @@ const ProudctInfo = ({ product }: Props) => {
       <h2 className="text-2xl font-semibold">{product?.title}</h2>
       <div className="flex flex-col lg:flex-row justify-start lg:items-center gap-4">
         <p className="text-lg font-normal text-gray-500 line-through">
-          <Price amount={product?.rowprice} />
+          <Price amount={product?.rowprice ?? 0} />
         </p>
 
-        <Price amount={product?.price} className="text-lg font-bold" />
+        <Price amount={product?.price ?? 0} className="text-lg font-bold" />
 
         <p className="text-sm">
           you saved{" "}
           <Price
             className="bg-green-700 text-white px-2 rounded-md"
-            amount={product?.rowprice - product?.price}
+            amount={(product?.rowprice ?? 0) - (product?.price ?? 0)}
           />
         </p>
       </div>
@@ -34,7 +34,9 @@ const ProudctInfo = ({ product }: Props) => {
       <button
         onClick={() => {
           dispatch(addToCart(product));
-          toast.success(`${product?.title.substring(0, 12)}... added to cart`);
+          toast.success(
+            `${(product?.title ?? "Product").substring(0, 12)}... added to cart`
+          );
         }}
         className="w-full py-4 bg-primary bg-yellow-400 hover:bg-black duration-300 text-white text-lg rounded-md"
       >

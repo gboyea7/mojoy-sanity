@@ -8,6 +8,8 @@ import NewArrival from "@/components/NewArrival";
 import Services from "@/components/Services";
 import TopDeal from "@/components/TopDeal";
 import { client } from "@/lib/sanityClient";
+import Brand from "@/sanity/schemas/brand";
+import Brands from "@/components/Brands";
 import { groq } from "next-sanity";
 
 export const revalidate = 10;
@@ -79,17 +81,42 @@ _id,
 const categoryQuery = `*[_type == 'category']{
 ...
 } | order(_createdAt asc)`;
+
+const productsQuery = groq`*[_type == "brand"]{
+  _id,
+  title,
+  
+  "products": *[_type == "product" && references(^._id)]{
+    _id,
+    title,
+    price,
+    description,
+    image,
+    slug,
+    position,
+    ratings,
+    description,
+    'brand': brand->title,
+    "category":category[0]->title,
+     rowprice,
+    _type,
+    _rev,
+    _createdAt
+  }
+}`;
 const HomePage = async () => {
   const banners = await client.fetch(bannerQuery);
   const newArrivalProducts = await client.fetch(newArrivalQuery);
   const topDealProducts = await client.fetch(topDealQuery);
   const bestSellerProducts = await client.fetch(bestSellerQuery);
   const categories = await client.fetch(categoryQuery);
+  const brandsWithProducts = await client.fetch(productsQuery);
 
   return (
     <main className="text-sm min-h-screen overflow-hidden">
       <Banner banners={banners} />
       <NewArrival products={newArrivalProducts} />
+      <Brands brands={brandsWithProducts} />
       <HomeBanner />
       <Services />
       <Category categories={categories} />

@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 const SucessPage = ({ searchParams }: any) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    !searchParams?.session_id ? redirect("/") : dispatch(resetCart());
-  }, [dispatch, searchParams?.session_id]);
+  // useEffect(() => {
+  //   !searchParams?.session_id ? redirect("/") : dispatch(resetCart());
+  // }, [dispatch, searchParams?.session_id]);
   return (
     <Container className="flex items-center justify-center py-20">
       <div className="min-h-[400px] flex flex-col ">

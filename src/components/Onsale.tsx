@@ -35,10 +35,10 @@ const Onsale = ({ products }: Props) => {
               />
               <div className="flex flex-col gap-2">
                 <p className="text-sm tracking-tighter font-medium">
-                  {item?.title.substring(0, 7)}
+                  {(item?.title ?? "").substring(0, 7)}
                 </p>
                 <p className="text-sm font-semibold">
-                  <Price amount={item?.price} />
+                  <Price amount={item?.price ?? 0} />
                 </p>
               </div>
             </Link>

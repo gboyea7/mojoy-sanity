@@ -58,10 +58,12 @@ const BestSeller = ({ products }: Props) => {
         viewport={{ once: true }}
         className="my-2 lg:my-4 ml-5 lg:ml-10 group"
       >
-        <h1 className="text-2xl text-center lg:text-3xl font-medium">
-          Best Seller
-        </h1>
-        <div className="h-2 my-4 lg:mx-24 mx-8 bg-slate-200 group-hover:bg-yellow-400"></div>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl text-center lg:text-3xl font-medium">
+            Best Sellers
+          </h1>
+          <hr className="border-t-2 border-[#FACA15] my-3 shadow-sm w-24" />
+        </div>
       </motion.div>
 
       <div>
