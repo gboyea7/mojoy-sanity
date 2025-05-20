@@ -1,6 +1,6 @@
 //component/carts.ta
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Container from "./Container";
 import { useDispatch, useSelector } from "react-redux";
 import { StateProps } from "../../type";
@@ -48,6 +48,7 @@ const Cart = () => {
   const [selectedDelivery, setSelectedDelivery] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [address, setAddress] = useState("");
   const [formError, setFormError] = useState("");
 
@@ -60,10 +61,16 @@ const Cart = () => {
   const router = useRouter();
 
   const componentProps = {
+    username,
     email,
     amount,
     metadata: {
       custom_fields: [
+        {
+          display_name: "User Name",
+          variable_name: "username",
+          value: username,
+        },
         {
           display_name: "Phone Number",
           variable_name: "phone_number",
@@ -99,6 +106,7 @@ const Cart = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            username: username,
             userEmail: email,
             amount: amount,
             state: selectedState,
@@ -112,6 +120,7 @@ const Cart = () => {
         if (!res.ok) {
           throw new Error(result.error || "Failed to create order");
         }
+        setUserName("");
         setEmail("");
         setAddress("");
         setPhone("");
@@ -134,6 +143,7 @@ const Cart = () => {
 
   // Validate form fields
   const isFormValid =
+    username &&
     email &&
     email.includes("@") &&
     phone &&
@@ -278,6 +288,18 @@ const Cart = () => {
                         </option>
                       ))}
                     </select>
+                  </div>
+                </div>
+                <div className="flex items-center justify-end mb-4">
+                  <div className="w-full md:w-[65%]">
+                    <input
+                      type="username"
+                      value={username}
+                      onChange={(e) => setUserName(e.target.value)}
+                      placeholder="Enter Name..."
+                      className="w-full border border-gray-300 rounded-md p-2 text-sm"
+                      required
+                    />
                   </div>
                 </div>
 

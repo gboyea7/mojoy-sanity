@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { sClient } from "../../../lib/sanityClient";
 
 interface RequestBody {
+  username: string;
   userEmail: string;
   amount: number;
   reference: string;
@@ -12,10 +13,19 @@ interface RequestBody {
 }
 
 export async function POST(request: Request) {
-  const { userEmail, amount, reference, status, state, lga, deliveryType } =
-    (await request.json()) as RequestBody;
+  const {
+    username,
+    userEmail,
+    amount,
+    reference,
+    status,
+    state,
+    lga,
+    deliveryType,
+  } = (await request.json()) as RequestBody;
 
   if (
+    !username ||
     !userEmail ||
     !amount ||
     !reference ||
@@ -32,6 +42,7 @@ export async function POST(request: Request) {
 
   try {
     console.log("Creating order with data:", {
+      username,
       userEmail,
       amount,
       reference,
@@ -42,6 +53,7 @@ export async function POST(request: Request) {
     });
     const order = await sClient.create({
       _type: "order",
+      username,
       userEmail,
       amount,
       state,
