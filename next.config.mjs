@@ -24,8 +24,8 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
               "font-src 'self' https://fonts.gstatic.com; " +
               "img-src 'self' data: https://images.sanity.io; " +
-              "connect-src 'self' https://bhqyc6ij.api.sanity.io https://api.paystack.co; " +
-              "frame-src 'self' https://js.paystack.co;",
+              "connect-src 'self' https://bhqyc6ij.api.sanity.io https://api.paystack.co https://accounts.google.com https://www.googleapis.com wss://bhqyc6ij.api.sanity.io; " +
+              "frame-src 'self' https://js.paystack.co https://checkout.paystack.com; ",
           },
 
           { key: "X-Frame-Options", value: "DENY" },

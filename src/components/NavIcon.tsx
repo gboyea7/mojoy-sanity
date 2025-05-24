@@ -28,13 +28,21 @@ const NavIcon = () => {
 
       {/* Account */}
       <div className="flex justify-between items-center">
-        <button
-          className="flex justify-between items-center md:w-[87px]"
-          onClick={() =>
-            !session?.user ? signIn() : toast.success("Your are signed in")
-          }
-        >
-          {session?.user ? (
+        {!session?.user?.email?.endsWith("@gmail.com") ? (
+          <Link
+            href="/auth/signin"
+            className="flex justify-between items-center md:w-[87px]"
+          >
+            <FaRegUser className="cursor-pointer text-xl text-gray-800 hover:text-yellow-400 md:-mb-1" />
+            <div className="text-sm hover:text-[#FACA15] cursor-pointer -mb-3 md:block hidden">
+              Account
+            </div>
+          </Link>
+        ) : (
+          <button
+            className="flex justify-between items-center md:w-[87px]"
+            onClick={() => toast.success("You are signed in")}
+          >
             <Image
               src={session?.user?.image!}
               alt="user image"
@@ -42,13 +50,11 @@ const NavIcon = () => {
               height={30}
               className="rounded-full "
             />
-          ) : (
-            <FaRegUser className="cursor-pointer text-xl text-gray-800 hover:text-yellow-400 md:-mb-1" />
-          )}
-          <div className="text-sm hover:text-[#FACA15] cursor-pointer -mb-3 md:block hidden">
-            Account
-          </div>
-        </button>
+            <div className="text-sm hover:text-[#FACA15] cursor-pointer -mb-3 md:block hidden">
+              Account
+            </div>
+          </button>
+        )}
       </div>
 
       <Toaster

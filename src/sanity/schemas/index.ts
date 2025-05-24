@@ -8,6 +8,7 @@ import hpbanner from "./hpbanner";
 import lenovobanner from "./lenovobanner";
 import order from "./order";
 import product from "./product";
+import users from "./users";
 
 export const schemaTypes = [
   banner,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   asusbanner,
   lenovobanner,
   order,
+  users,
 ];

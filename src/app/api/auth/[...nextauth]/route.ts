@@ -1,5 +1,8 @@
 import GoogleProvider from "next-auth/providers/google";
-import NextAuth from "next-auth/next";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import { sClient, client } from "@/lib/sanityClient";
 
 const authOptions = {
   providers: [
@@ -8,9 +11,6 @@ const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  // pages: {
-  //   signIn: "auth/signin", // Use custom page
-  // },
 };
 
 const handler = NextAuth(authOptions);
