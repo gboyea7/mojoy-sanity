@@ -22,15 +22,17 @@ const Product = ({ product, bg }: Props) => {
     <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500  rounded-lg overflow-hidden group">
       <div className="w-full h-64 md:h-80 flex items-center justify-center bg-white overflow-hidden">
         <div className={`relative ${bg}`}>
-          <div>
-            <Image
-              src={urlFor(product?.image).url()}
-              alt="product image"
-              width={500}
-              height={500}
-              className="w-52 h-52 md:w-72 md:h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1] lg:group-hover:scale-[1.2]"
-            />
-          </div>
+          <Link href={`/product/${product?.slug?.current}`}>
+            <div>
+              <Image
+                src={urlFor(product?.image).url()}
+                alt="product image"
+                width={500}
+                height={500}
+                className="w-52 h-52 md:w-72 md:h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1] lg:group-hover:scale-[1.2]"
+              />
+            </div>
+          </Link>
           <div className="bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300">
             <button
               onClick={() => {
@@ -73,11 +75,13 @@ const Product = ({ product, bg }: Props) => {
         </div>
       </div>
       <div className="px-2 py-2 md:py-4 flex flex-col gap-1 w-full bg-slate-200">
-        <div className="flex items-center justify-center">
-          <h2 className="text-xs md:text-sm text-primary font-bold">
-            {(product?.title ?? "No Title").substring(0, 55)}...
-          </h2>
-        </div>
+        <Link href={`/product/${product?.slug?.current}`}>
+          <div className="flex items-center justify-center">
+            <h2 className="text-xs md:text-sm text-primary font-bold">
+              {(product?.title ?? "No Title").substring(0, 55)}...
+            </h2>
+          </div>
+        </Link>
         <div className="flex items-center justify-between">
           <p className="text-[#767676] text-sm">
             Product of{" "}

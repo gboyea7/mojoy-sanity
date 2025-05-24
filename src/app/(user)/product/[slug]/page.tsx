@@ -4,7 +4,7 @@ import { client, urlFor } from "@/lib/sanityClient";
 import { groq } from "next-sanity";
 import Image from "next/image";
 import { ProductProps } from "../../../../../type";
-import ProudctInfo from "@/components/ProductInfo";
+import ProductInfo from "@/components/ProductInfo";
 import { PortableText } from "@portabletext/react";
 import { RichText } from "@/components/RichText";
 import RelatedProduct from "@/components/RelatedProduct";
@@ -102,13 +102,13 @@ const SinglePage = async ({ params: { slug } }: Props) => {
           />
         </div>
         <div className="w-full md:col-span-2 xl:col-span-3 xl:p-14 flex flex-col gap-6 justify-center">
-          <ProudctInfo product={product} />
+          <ProductInfo product={product} />
         </div>
       </div>
       <PortableText value={product?.body} components={RichText} />
       <div className="bg-gray-50 my-5">
         <h1 className="text-2xl text-center lg:text-3xl pt-5 font-medium">
-          items from {product?.brand}
+          Items from {product?.brand}
         </h1>
         <RelatedProduct relatedProducts={relatedProducts} />
       </div>
