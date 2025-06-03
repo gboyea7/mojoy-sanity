@@ -9,11 +9,19 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
+
+    if (!email || !password) {
+      setError("Email and password are required");
+      setIsLoading(false);
+      return;
+    }
 
     const result = await signIn("credentials", {
       redirect: false,
@@ -22,7 +30,10 @@ export default function SignIn() {
     });
 
     if (result?.error) {
-      setError(result.error);
+      setError(
+        "Invalid email or password. Please try again, also check internet connection."
+      );
+      setIsLoading(false);
     } else {
       router.push("/");
     }
@@ -36,6 +47,7 @@ export default function SignIn() {
         </h1>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 mb-2">
@@ -65,9 +77,12 @@ export default function SignIn() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition font-poppins"
+            disabled={isLoading}
+            className={`w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition font-poppins ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Sign In
+            {isLoading ? "Processing..." : "Sign In"}
           </button>
         </form>
         <p className="mt-4 text-center">
@@ -83,6 +98,14 @@ export default function SignIn() {
           >
             Sign In with Google
           </button>
+        </div>
+        <div className="mt-2 text-center">
+          <Link
+            href="/auth/forgot-password"
+            className="text-blue-500 hover:underline"
+          >
+            Forgot Password?
+          </Link>
         </div>
       </div>
     </div>

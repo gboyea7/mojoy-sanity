@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/mojoySlice";
 import toast, { Toaster } from "react-hot-toast";
 import Price from "./Price";
+import WishlistButton from "./WishlistButton";
+import { useSession } from "next-auth/react";
 
 interface Props {
   product: ProductProps;
@@ -18,20 +20,23 @@ interface Props {
 
 const Product = ({ product, bg }: Props) => {
   const dispatch = useDispatch();
+  const { status } = useSession();
   return (
-    <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500  rounded-lg overflow-hidden group">
+    <div className="w-full relative group border-[1px] border-gray-300 hover:shadow-lg duration-200 shadow-gray-500 rounded-lg overflow-hidden group">
       <div className="w-full h-64 md:h-80 flex items-center justify-center bg-white overflow-hidden">
         <div className={`relative ${bg}`}>
           <Link href={`/product/${product?.slug?.current}`}>
-            <div>
-              <Image
-                src={urlFor(product?.image).url()}
-                alt="product image"
-                width={500}
-                height={500}
-                className="w-52 h-52 md:w-72 md:h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1] lg:group-hover:scale-[1.2]"
-              />
-            </div>
+            {
+              <div>
+                <Image
+                  src={urlFor(product?.image).url()}
+                  alt="product image"
+                  width={500}
+                  height={500}
+                  className="w-52 h-52 md:w-72 md:h-72 object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1] lg:group-hover:scale-[1.2]"
+                />
+              </div>
+            }
           </Link>
           <div className="bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300">
             <button
@@ -48,7 +53,7 @@ const Product = ({ product, bg }: Props) => {
               <span>
                 <AiOutlineShopping className="text-md" />
               </span>
-              <p className="hidden lg:flex">Cart</p>
+              <p className="flex">Cart</p>
             </button>
             <Link
               href={`/product/${product?.slug?.current}`}
@@ -57,19 +62,26 @@ const Product = ({ product, bg }: Props) => {
               <span>
                 <BsArrowsFullscreen className="text-md" />
               </span>
-              <p className="hidden lg:flex">Preview</p>
+              <p className="flex">Preview</p>
             </Link>
           </div>
+          <div className="bg-red-200"></div>
           {product?.quantity && product?.quantity < 5 && (
             <p className="absolute top-4 left-3 text-sm text-red-500">
               Only {product?.quantity} left!
             </p>
           )}
           {product?.isnew && (
-            <div className="absolute top-2 right-2 z-10">
+            <div className="absolute top-2 left-2 z-10">
               <p className="bg-yellow-400 px-4 py-1 text-primary flex justify-center items-center text-sm font-semibold hover:bg-gray-800 hover:text-yellow-400 duration-300 cursor-pointer rounded-md">
                 New
               </p>
+            </div>
+          )}
+          {/* Wishlist Button */}
+          {status === "authenticated" && (
+            <div className="absolute top-2 right-2 z-10">
+              <WishlistButton product={product} />
             </div>
           )}
         </div>
@@ -86,7 +98,9 @@ const Product = ({ product, bg }: Props) => {
           <p className="text-[#767676] text-sm">
             Product of{" "}
             <span className="font-semibold text-gray-950">
-              {product?.brand}
+              {typeof product?.brand === "string"
+                ? product.brand
+                : product?.brand?.title ?? "Unknown"}
             </span>
           </p>
           <div className="flex flex-col items-end md:items-center justify-center">

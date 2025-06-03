@@ -69,7 +69,7 @@ const NewArrival = ({ products }: Props) => {
         {/* Conditional Rendering and Grid Display */}
         {products.length === 0 ? (
           <div className="px-2 text-2xl capitalize text-center">
-            No new products available.
+            New Products coming soon!
           </div>
         ) : (
           <div

@@ -9,6 +9,8 @@ import lenovobanner from "./lenovobanner";
 import order from "./order";
 import product from "./product";
 import users from "./users";
+import passwordResetToken from "./passwordResetToken";
+import wishlist from "./wishlist";
 
 export const schemaTypes = [
   banner,
@@ -22,4 +24,6 @@ export const schemaTypes = [
   lenovobanner,
   order,
   users,
+  passwordResetToken,
+  wishlist,
 ];

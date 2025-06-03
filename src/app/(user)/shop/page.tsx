@@ -69,9 +69,19 @@ const ShopPage = () => {
 
   const filteredProducts = productData.filter((product: ProductProps) => {
     const matchesCategory = selectedCategory
-      ? product.category === selectedCategory
+      ? product.category &&
+        typeof product.category === "object" &&
+        "title" in product.category
+        ? product.category.title === selectedCategory
+        : false
       : true;
-    const matchesBrand = selectedBrand ? product.brand === selectedBrand : true;
+    const matchesBrand = selectedBrand
+      ? product.brand &&
+        typeof product.brand === "object" &&
+        "title" in product.brand
+        ? product.brand.title === selectedBrand
+        : false
+      : true;
     const matchesPrice =
       typeof product.price === "number" &&
       product.price >= priceRange.min &&

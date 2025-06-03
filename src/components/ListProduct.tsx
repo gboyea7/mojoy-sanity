@@ -67,7 +67,7 @@ const ListProduct = ({ product, bg }: Props) => {
           <p className="text-[#767676] text-[14px]">
             a product by{" "}
             <span className="font-semibold text-gray-700">
-              {product?.brand}
+              {product?.brand?.title ?? ""}
             </span>
           </p>
           <div className="flex items-center gap-1">

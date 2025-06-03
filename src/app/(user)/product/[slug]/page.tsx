@@ -108,7 +108,10 @@ const SinglePage = async ({ params: { slug } }: Props) => {
       <PortableText value={product?.body} components={RichText} />
       <div className="bg-gray-50 my-5">
         <h1 className="text-2xl text-center lg:text-3xl pt-5 font-medium">
-          Items from {product?.brand}
+          Items from{" "}
+          {typeof product?.brand === "string"
+            ? product.brand
+            : product?.brand?.title || product?.brand?.title}
         </h1>
         <RelatedProduct relatedProducts={relatedProducts} />
       </div>

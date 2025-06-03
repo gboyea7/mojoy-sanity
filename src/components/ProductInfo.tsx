@@ -45,12 +45,23 @@ const ProudctInfo = ({ product }: Props) => {
       <p className="font-normal text-sm">
         <span className="text-base font-medium">Category:</span>
         <span className="mx-2 font-bold text-gray-950">
-          {product?.category}
+          {Array.isArray(product?.category)
+            ? product?.category.map((cat, idx) => (
+                <span key={idx}>
+                  {cat.title}
+                  {idx < (product?.category?.length ?? 0) - 1 ? ", " : ""}
+                </span>
+              ))
+            : product?.category}
         </span>
       </p>
       <p className="font-normal text-sm">
         <span className="text-base font-medium">Brand:</span>
-        <span className="mx-2 font-bold text-gray-950">{product?.brand}</span>
+        <span className="mx-2 font-bold text-gray-950">
+          {typeof product?.brand === "object" && product?.brand !== null
+            ? product.brand.title
+            : product?.brand}
+        </span>
       </p>
       <Toaster
         position="bottom-right"

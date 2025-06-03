@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import mojoyReducer from "./mojoySlice";
+import wishlistReducer from "./wishlistSlice";
+
 import {
   persistStore,
   persistReducer,
@@ -45,10 +47,12 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, mojoyReducer);
+const persistReducer2 = persistReducer(persistConfig, wishlistReducer);
 
 export const store = configureStore({
   reducer: {
     mojoy: persistedReducer,
+    wishlist: persistReducer2,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,6 +1,7 @@
 //type.ts
 export interface ProductProps {
   _id: string;
+  name?: string;
   _type?: string;
   _rev?: string;
   _createdAt?: string;
@@ -17,12 +18,16 @@ export interface ProductProps {
   image?: {
     _type: string;
     asset: {
-      _ref: string;
-      _type: string;
+      _id: string;
+      url: string;
     };
   };
-  category?: string;
-  brand?: string;
+  category?: {
+    title: string;
+  }[];
+  brand?: {
+    title: string;
+  };
   isnew?: boolean;
   body?: any;
   quantity?: any; // Add quantity property
