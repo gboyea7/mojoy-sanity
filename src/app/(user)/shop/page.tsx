@@ -67,21 +67,11 @@ const ShopPage = () => {
     fetchData();
   }, []);
 
-  const filteredProducts = productData.filter((product: ProductProps) => {
+  const filteredProducts = productData.filter((product: any) => {
     const matchesCategory = selectedCategory
-      ? product.category &&
-        typeof product.category === "object" &&
-        "title" in product.category
-        ? product.category.title === selectedCategory
-        : false
+      ? product.category === selectedCategory
       : true;
-    const matchesBrand = selectedBrand
-      ? product.brand &&
-        typeof product.brand === "object" &&
-        "title" in product.brand
-        ? product.brand.title === selectedBrand
-        : false
-      : true;
+    const matchesBrand = selectedBrand ? product.brand === selectedBrand : true;
     const matchesPrice =
       typeof product.price === "number" &&
       product.price >= priceRange.min &&

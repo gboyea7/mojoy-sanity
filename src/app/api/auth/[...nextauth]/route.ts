@@ -148,6 +148,10 @@ const authOptions = {
           await sendWelcomeEmail(user.email, user.name);
         }
       }
+      // Redirect to homepage after Google sign in
+      if (account?.provider === "google") {
+        return process.env.NEXTAUTH_URL || "/";
+      }
       return true;
     },
     async session({ session, token }: { session: any; token: any }) {
