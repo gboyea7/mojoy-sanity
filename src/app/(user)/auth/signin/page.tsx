@@ -93,7 +93,12 @@ export default function SignIn() {
         </p>
         <div className="mt-4 text-center">
           <button
-            onClick={() => signIn("google")}
+            onClick={async () => {
+              const result = await signIn("google", { redirect: false });
+              if (!result?.error) {
+                router.push("/");
+              }
+            }}
             className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition font-poppins"
           >
             Sign In with Google
