@@ -14,7 +14,6 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleSignIn = async () => {
-    setIsLoading(true);
     const res = await signIn("google", {
       redirect: true,
       callbackUrl: "/",
