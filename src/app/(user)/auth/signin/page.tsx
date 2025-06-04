@@ -21,7 +21,6 @@ export default function SignIn() {
     });
     if (res?.error) {
       setError("Failed to sign in with Google. Please try again.");
-      setIsLoading(false);
     }
   };
 
