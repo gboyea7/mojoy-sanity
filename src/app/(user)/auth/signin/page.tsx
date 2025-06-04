@@ -14,14 +14,14 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleSignIn = async () => {
+    setIsLoading(true);
     const res = await signIn("google", {
-      redirect: false,
+      redirect: true,
+      callbackUrl: "/",
     });
     if (res?.error) {
       setError("Failed to sign in with Google. Please try again.");
       setIsLoading(false);
-    } else {
-      router.push("/");
     }
   };
 
