@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     const transporter = nodemailer.createTransport({
       host: process.env.AWS_SES_SMTP_HOST,
       port: Number(process.env.AWS_SES_SMTP_PORT),
-      secure: false, // Use STARTTLS
+      secure: true, // Use STARTTLS
       auth: {
         user: process.env.AWS_SES_SMTP_USER,
         pass: process.env.AWS_SES_SMTP_PASS,
