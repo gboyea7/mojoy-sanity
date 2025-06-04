@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,11 @@ export default function SignIn() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  const handleSignIn = async () => {
+    await signIn("google", { callbackUrl: "/" });
+    toast.success("Signed In Successfully");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,12 +99,7 @@ export default function SignIn() {
         </p>
         <div className="mt-4 text-center">
           <button
-            onClick={async () => {
-              const result = await signIn("google", { redirect: false });
-              if (!result?.error) {
-                router.push("/");
-              }
-            }}
+            onClick={handleSignIn}
             className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition font-poppins"
           >
             Sign In with Google
