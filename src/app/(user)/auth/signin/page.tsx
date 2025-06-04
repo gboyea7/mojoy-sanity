@@ -14,7 +14,9 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleSignIn = async () => {
-    const res = await signIn("google");
+    const res = await signIn("google", {
+      redirect: false,
+    });
     if (res?.error) {
       setError("Failed to sign in with Google. Please try again.");
       setIsLoading(false);
