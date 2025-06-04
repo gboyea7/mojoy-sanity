@@ -39,7 +39,7 @@ async function sendWelcomeEmail(email: string, name: string | null) {
             Start Shopping
           </a>
           <p style="font-size: 14px; color: #666;">
-            If you have any questions, contact us at support@mojoyicl.com.
+            If you have any questions, contact us at mojoyicl@gmail.com.
           </p>
         </div>
       `,
@@ -147,6 +147,8 @@ const authOptions = {
           // Send welcome email
           await sendWelcomeEmail(user.email, user.name);
         }
+        // Redirect to homepage after sign-in
+        return "/";
       }
       return true;
     },
