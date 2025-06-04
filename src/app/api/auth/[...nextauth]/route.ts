@@ -147,9 +147,8 @@ const authOptions = {
           // Send welcome email
           await sendWelcomeEmail(user.email, user.name);
         }
-        // Redirect to homepage after sign-in
-        return process.env.NEXTAUTH_URL || "/";
       }
+
       return true;
     },
     async session({ session, token }: { session: any; token: any }) {
