@@ -14,8 +14,13 @@ export default function SignIn() {
   const router = useRouter();
 
   const handleSignIn = async () => {
-    await signIn("google", { callbackUrl: "/" });
-    toast.success("Signed In Successfully");
+    const res = await signIn("google");
+    if (res?.error) {
+      setError("Failed to sign in with Google. Please try again.");
+      setIsLoading(false);
+    } else {
+      router.push("/");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
