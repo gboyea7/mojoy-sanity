@@ -196,7 +196,7 @@ const Cart = () => {
           </div>
           <button
             onClick={handleReset}
-            className="py-2 px-4 bg-red-500 text-white text-md font-sm uppercase mb-4 hover:bg-red-700 duration-300 rounded-md"
+            className="py-2 px-3 bg-red-500 text-white text-sm font-sm uppercase mb-4 hover:bg-red-700 duration-300 rounded-md"
           >
             Clear Cart
           </button>
@@ -229,7 +229,7 @@ const Cart = () => {
                       id="state"
                       value={selectedState}
                       onChange={handleStateChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm sm:text-sm py-2 px-4"
+                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm text-sm py-2 px-4"
                       required
                     >
                       <option value="" disabled>
@@ -251,7 +251,7 @@ const Cart = () => {
                       id="lga"
                       value={selectedLGA}
                       onChange={(e) => setSelectedLGA(e.target.value)}
-                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm sm:text-sm py-2 px-4"
+                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm text-sm py-2 px-4"
                       disabled={!selectedState}
                     >
                       <option value="" disabled>
@@ -277,7 +277,7 @@ const Cart = () => {
                       required
                       value={selectedDelivery}
                       onChange={(e) => setSelectedDelivery(e.target.value)}
-                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm sm:text-sm py-2 px-4"
+                      className="mt-1 block w-full rounded-md border-gray-300 border shadow-sm text-sm py-2 px-4"
                     >
                       <option value="" disabled>
                         Select Delivery Type

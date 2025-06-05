@@ -48,7 +48,7 @@ const Product = ({ product, bg }: Props) => {
                   }... added to cart`
                 );
               }}
-              className="bg-gray-800 md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2 text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
+              className="bg-gray-800 md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2 text-xs rounded-full flex items-center gap-2 hover:bg-yellow-400 hover:text-white duration-200"
             >
               <span>
                 <AiOutlineShopping className="text-md" />
@@ -57,7 +57,7 @@ const Product = ({ product, bg }: Props) => {
             </button>
             <Link
               href={`/product/${product?.slug?.current}`}
-              className="bg-gray-800  md:w-[100px] justify-center text-gray-200 p-4 md:px-4  md:py-2  text-xs rounded-full flex items-center gap-4 hover:bg-yellow-400 hover:text-white duration-200"
+              className="bg-gray-800  md:w-[100px] justify-center text-gray-200 p-4 md:px-4 md:py-2  text-xs rounded-full flex items-center gap-2 hover:bg-yellow-400 hover:text-white duration-200"
             >
               <span>
                 <BsArrowsFullscreen className="text-md" />
@@ -97,12 +97,13 @@ const Product = ({ product, bg }: Props) => {
         <div className="flex items-center justify-between">
           <p className="text-[#767676] text-sm">
             Product of{" "}
-            <span className="font-semibold text-gray-950">
+            <span className="font-semibold text-gray-950 capitalize">
               {typeof product?.brand === "string"
                 ? product.brand
                 : product?.brand?.title ?? "Unknown"}
             </span>
           </p>
+
           <div className="flex flex-col items-end md:items-center justify-center">
             <p className="font-normal md:font-medium line-through decoration-red-500 text-xs">
               <Price amount={product?.rowprice ?? 0} />
@@ -112,6 +113,13 @@ const Product = ({ product, bg }: Props) => {
             </p>
           </div>
         </div>
+        <div>
+          <strong>ID: </strong>
+          <span className="text-md">
+            {product?.productId ?? <span className="text-gray-500">N/A</span>}
+          </span>
+        </div>
+
         <div className="flex items-center justify-center md:justify-start gap-1">
           {/* Loop to render stars based on the rating */}
           {[...Array(product.ratings)].map((_, index) => (

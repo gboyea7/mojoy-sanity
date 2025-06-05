@@ -38,31 +38,38 @@ const ProudctInfo = ({ product }: Props) => {
             `${(product?.title ?? "Product").substring(0, 12)}... added to cart`
           );
         }}
-        className="w-full py-4 bg-primary bg-yellow-400 hover:bg-black duration-300 text-white text-lg rounded-md"
+        className="bg-[#FACA15] font-medium text-black text-sm py-3 px-6 rounded-md hover:text-yellow-400 hover:bg-black duration-300 focus:outline-none focus:ring-offset-2 w-full md:w-auto"
       >
         Add to Cart
       </button>
       <p className="font-normal text-sm">
-        <span className="text-base font-medium">Category:</span>
-        <span className="mx-2 font-bold text-gray-950">
-          {Array.isArray(product?.category)
-            ? product?.category.map((cat, idx) => (
-                <span key={idx}>
-                  {cat.title}
-                  {idx < (product?.category?.length ?? 0) - 1 ? ", " : ""}
-                </span>
-              ))
-            : product?.category}
-        </span>
-      </p>
-      <p className="font-normal text-sm">
+        <p className="font-normal text-sm">
+          <span className="text-base font-medium">Category:</span>
+          <span className="mx-2 font-bold text-gray-950">
+            {Array.isArray(product?.category)
+              ? product?.category.map((cat, idx) => (
+                  <span key={idx}>
+                    {cat.title}
+                    {idx < (product?.category?.length ?? 0) - 1 ? ", " : ""}
+                  </span>
+                ))
+              : product?.category}
+          </span>
+        </p>
         <span className="text-base font-medium">Brand:</span>
         <span className="mx-2 font-bold text-gray-950">
           {typeof product?.brand === "object" && product?.brand !== null
             ? product.brand.title
             : product?.brand}
         </span>
+        <div>
+          <strong>ID: </strong>
+          <span className="text-md">
+            {product?.productId ?? <span className="text-gray-500">N/A</span>}
+          </span>
+        </div>
       </p>
+
       <Toaster
         position="bottom-right"
         toastOptions={{

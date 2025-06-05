@@ -28,6 +28,7 @@ export interface ProductProps {
   brand?: {
     title: string;
   };
+  productId?: string; // Add productId property
   isnew?: boolean;
   body?: any;
   quantity?: any; // Add quantity property

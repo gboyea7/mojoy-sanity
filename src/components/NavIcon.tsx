@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { StateProps } from "../../type";
 import Link from "next/link";
 import { FaRegUser, FaOpencart } from "react-icons/fa6";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -46,7 +46,7 @@ const NavIcon = () => {
                 className="rounded-full"
               />
             ) : (
-              <div className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-gray-200 md:mt-2 mt-0">
+              <div className="flex  h-[30px] w-[30px] md:h-[20px] md:w-[20px] items-center justify-center rounded-full bg-gray-200 md:mt-2 mt-0">
                 <span className="text-sm font-medium text-gray-700">
                   {session.user.name?.charAt(0).toUpperCase() || "U"}
                 </span>
@@ -60,13 +60,13 @@ const NavIcon = () => {
             <div className="absolute -right-20 md:right-0 top-6 mt-2 opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 w-36 rounded-md bg-white shadow-lg z-40 cursor-pointer border border-gray-200 py-1">
               <Link
                 href="/auth/wishlist"
-                className="block px-3 text-left text-sm text-gray-700 hover:bg-gray-100"
+                className="block p-2 text-left text-sm text-gray-700 hover:bg-gray-100"
               >
                 Wishlist
               </Link>
               <button
                 onClick={handleSignOut}
-                className="block w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                className="block w-full p-2 text-left text-sm text-gray-700 hover:bg-gray-100"
               >
                 Sign Out
               </button>

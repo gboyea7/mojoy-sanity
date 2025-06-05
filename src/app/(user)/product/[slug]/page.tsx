@@ -49,6 +49,7 @@ const SinglePage = async ({ params: { slug } }: Props) => {
   image,
   "category":category[0]->title,
   isnew,
+  productId,  
   body,
 
   }`;
@@ -85,7 +86,7 @@ const SinglePage = async ({ params: { slug } }: Props) => {
           href={"/shop"}
           className="text-md underline hover:text-yellow-400 font-semibold"
         >
-          back to shop
+          Back to Shop
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4 h-full bg-gray-100 p-4">
@@ -96,9 +97,9 @@ const SinglePage = async ({ params: { slug } }: Props) => {
           <Image
             src={urlFor(product?.image).url()}
             alt="product image"
-            className="w-full h-full object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1]"
-            width={500}
-            height={500}
+            className="md:ml-8 w-full h-full object-contain duration-300 transition-all ease-in-out group-hover:scale-[1.1]"
+            width={230}
+            height={230}
           />
         </div>
         <div className="w-full md:col-span-2 xl:col-span-3 xl:p-14 flex flex-col gap-6 justify-center">

@@ -75,7 +75,7 @@ const Banner2 = ({ banners, bannerText }: any) => {
             />
             <div
               className="w-full h-[300px] absolute top-0 flex justify-center items-center"
-              style={{ backgroundColor: "hsla(240, 50.60%, 15.90%, 0.47)" }}
+              style={{ backgroundColor: "hsla(240, 50.60%, 15.90%, 0.67)" }}
             >
               <div className="flex flex-col gap-5 justify-center items-center">
                 <p className="text-white text-md md:text-5xl text-shadow-4xl text-center font-montserrat font-medium max-w-lg md:max-w-2xl mx-auto font-semibold ">

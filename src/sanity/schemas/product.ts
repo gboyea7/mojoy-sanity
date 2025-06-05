@@ -89,6 +89,12 @@ export default defineType({
       title: "Quantity",
       type: "number",
     }),
+    defineField({
+      name: "productId",
+      title: "Product ID",
+      description: "Unique identifier for the product",
+      type: "string",
+    }),
   ],
   preview: {
     select: {

@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-col w-full overflow-hidden ">
+    <div className="flex flex-col w-full">
       {/*Top nav*/}
       <div className="w-full bg-[#FAFAFA] border-b border-b-gray-100 md:block hidden">
         <ul className="flex items-center justify-end text-xs text-[#333333] font-light px-16 h-8 bg-[#FAFAFA]">
