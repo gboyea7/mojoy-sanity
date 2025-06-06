@@ -114,8 +114,8 @@ const Product = ({ product, bg }: Props) => {
           </div>
         </div>
         <div>
-          <strong>ID: </strong>
-          <span className="text-md">
+          <strong className="text-sm">ID: </strong>
+          <span className="text-sm">
             {product?.productId ?? <span className="text-gray-500">N/A</span>}
           </span>
         </div>

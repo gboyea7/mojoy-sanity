@@ -34,6 +34,7 @@ export async function GET(req: NextRequest) {
             title
           },
           isnew,
+          productId,
           ratings,
           description,
           category[]->{
