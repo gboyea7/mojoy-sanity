@@ -43,7 +43,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 font-poppins">
+    <div className="flex items-center justify-center bg-gray-100 font-poppins py-14">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-montserrat font-bold mb-6 text-center">
           Forgot Password

@@ -51,7 +51,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 font-poppins">
+    <div className="py-8 flex items-center justify-center bg-gray-100 font-poppins">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-xl font-semibold text-center mb-8">
           Sign into Your Account

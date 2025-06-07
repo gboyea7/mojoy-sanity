@@ -67,11 +67,8 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 font-poppins">
+    <div className="flex min-h-0 md:min-h-screen items-center justify-center bg-gray-100 font-poppins">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
-        <div className="mb-6 flex justify-center">
-          <Image src={logo} alt="MojoYICL Logo" width={100} height={40} />
-        </div>
         <h1 className="mb-6 text-center text-2xl font-montserrat font-bold text-gray-800">
           Create an Account
         </h1>

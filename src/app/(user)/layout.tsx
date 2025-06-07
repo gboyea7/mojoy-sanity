@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import Footer from "../../components/Footer";
 import NavBanner from "@/components/NavBanner";
 import Layout from "@/components/Layout";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata = {
   title: "Mojoy | Thinking of you",
@@ -51,6 +52,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <WhatsAppButton />
           </Layout>
         </body>
       </html>
