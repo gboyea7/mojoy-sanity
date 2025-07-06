@@ -41,16 +41,16 @@ export async function POST(request: Request) {
   }
 
   try {
-    console.log("Creating order with data:", {
-      username,
-      userEmail,
-      amount,
-      reference,
-      status,
-      state,
-      lga,
-      deliveryType,
-    });
+    // console.log("Creating order with data:", {
+    //   username,
+    //   userEmail,
+    //   amount,
+    //   reference,
+    //   status,
+    //   state,
+    //   lga,
+    //   deliveryType,
+    // });
     const order = await sClient.create({
       _type: "order",
       username,
@@ -66,7 +66,6 @@ export async function POST(request: Request) {
     console.log("Order created:", order);
     return NextResponse.json({ order }, { status: 200 });
   } catch (err: any) {
-    console.error("Error creating order:", err);
     return NextResponse.json(
       { error: "Failed to create order", details: err.message },
       { status: 500 }

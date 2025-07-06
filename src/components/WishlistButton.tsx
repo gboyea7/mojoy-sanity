@@ -17,7 +17,7 @@ const WishlistButton = ({ product }: WishlistButtonProps) => {
   );
 
   if (!product?._id) {
-    console.error("Product does not have a valid _id");
+    // console.error("Product does not have a valid _id");
     return null;
   }
 
@@ -53,7 +53,6 @@ const WishlistButton = ({ product }: WishlistButtonProps) => {
         );
       }
     } catch (error) {
-      console.error("Error updating wishlist:", error);
       toast.error("Failed to update wishlist");
     }
   };

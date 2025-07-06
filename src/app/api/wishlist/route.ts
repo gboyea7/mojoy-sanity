@@ -47,7 +47,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(wishlistItems?.products || []);
   } catch (error) {
-    console.error("Error fetching wishlist:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
