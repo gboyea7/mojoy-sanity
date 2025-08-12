@@ -122,7 +122,10 @@ const Product = ({ product, bg }: Props) => {
 
         <div className="flex items-center justify-center md:justify-start gap-1">
           {/* Loop to render stars based on the rating */}
-          {[...Array(product.ratings)].map((_, index) => (
+          {(typeof product?.ratings === "number" && product.ratings > 0
+            ? Array.from({ length: Math.floor(product.ratings) })
+            : []
+          ).map((_, index) => (
             <MdOutlineStarPurple500
               key={index}
               className="text-lg text-yellow-400"
