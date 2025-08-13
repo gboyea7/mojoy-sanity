@@ -1,4 +1,3 @@
-//component/carts.ta
 "use client";
 import React, { use, useState } from "react";
 import Container from "./Container";
